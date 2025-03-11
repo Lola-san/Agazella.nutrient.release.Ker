@@ -83,7 +83,7 @@ boxplot_violon_compo_scats_site <- function(scat_compo_tib) {
                    strip.text.x = ggplot2::element_text(size = 16, 
                                                         face = "bold"), 
                    legend.position = "none")
-  ggplot2::ggsave("output/boxplot_violon_scat_conc_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/boxplot_violon_scat_conc_sites.jpg",
                   scale = 1,
                   height = 9, width = 10
   )
@@ -156,7 +156,7 @@ boxplot_compo_scats_site <- function(scat_compo_tib) {
                    strip.text.x = ggplot2::element_text(size = 16, 
                                                         face = "bold"), 
                    legend.position = "none")
-  ggplot2::ggsave("output/boxplot_only_scat_conc_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/boxplot_only_scat_conc_sites.jpg",
                   scale = 1,
                   height = 9, width = 10
   )
@@ -233,7 +233,7 @@ table_compo_scats_site <- function(scat_compo_tib
                                        Ag, Mo, Pb)))
   
   openxlsx::write.xlsx(table_summary, 
-                       file = paste0("output/table_summary_sites_scat_compo_data.xlsx"))
+                       file = paste0("output/figures-tables-article/table_summary_sites_scat_compo_data.xlsx"))
   
 }
 
@@ -353,7 +353,7 @@ mean_scat_compo_relative_sites <- function(scat_compo_tib) {
                                                         face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/mean_scat_compo_rel_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/mean_scat_compo_rel_sites.jpg",
                   scale = 1,
                   height = 6, width = 9
   )
@@ -446,423 +446,12 @@ barplot_nut_scat_compo_relative_sites <- function(scat_compo_tib) {
                                                         face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/scat_compo_rel_comp_sites_Agazella.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/scat_compo_rel_comp_sites_Agazella.jpg",
                   scale = 1,
                   height = 3, width = 8
   )
   
-  # Cap Noir
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")), 
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Cap Noir") |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Nutrient, y = conc_relative), 
-  #                     fill = "#353839", 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_dodge(1)) +
-  #   ggplot2::facet_wrap(~ Code_sample) + 
-  #   ggplot2::ggtitle("Cap Noir") +
-  #   ggplot2::ylab("Relative proportion in scats") +
-  #   ggplot2::xlab("Nutrient") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
-  #                  axis.text.y = ggplot2::element_text(size = 14), 
-  #                  title = ggplot2::element_text(size = 17, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 16, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 16, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "none")
-  # ggplot2::ggsave("output/scat_compo_rel_comp_CapNoir_Agazella_dodge.jpg",
-  #                 scale = 1,
-  #                 height = 6, width = 16
-  # )
-  
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")),
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Cap Noir") |>
-  #   # order of samples determined in work-in-progress/set-up-the-rest.R
-  #   dplyr::mutate(Code_sample = factor(Code_sample, 
-  #                                      levels = c("CN29", "CN01", "CN20", 
-  #                                                 "CN14", "CN18", "CN11", 
-  #                                                 "CN22", "CN13", "CN06",
-  #                                                 "CN27", "CN07", "CN03",
-  #                                                 "CN17", "CN08", "CN24",
-  #                                                 "CN04", "CN25", "CN23",
-  #                                                 "CN26", "CN02", "CN19",
-  #                                                 "CN16", "CN21", "CN05",
-  #                                                 "CN15", "CN28", "CN09",
-  #                                                 "CN10"))) |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Code_sample, y = conc_relative, 
-  #                                  fill = Nutrient), 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_stack()) +
-  #   ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
-  #                                         "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
-  #                                         "#CEC917FF", "#3A160AFF", "#E75B64FF",
-  #                                         "#92BBD9FF", "#D98594FF", "#26432FFF",
-  #                                         "#DE7862FF", "#4C413FFF", "#E8C4A2FF", 
-  #                                         "#2e276a", "#5c4d73", "#D8AF39FF",
-  #                                         "#583B2BFF", "#14191FFF")) +
-  #   ggplot2::ggtitle("Cap Noir") +
-  #   ggplot2::ylab("Relative fraction") +
-  #   ggplot2::xlab("Scat sample") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
-  #                  axis.text.x = ggplot2::element_blank(), 
-  #                  title = ggplot2::element_text(size = 15, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "bottom", 
-  #                  legend.text = ggplot2::element_text(size = 12))
-  # ggplot2::ggsave("output/scat_compo_rel_comp_CapNoir_Agazella_stack_Caorder.jpg",
-  #                 scale = 1,
-  #                 height = 4, width = 6
-  # )
-  
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")),
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Cap Noir") |>
-  #   # order of samples determined in work-in-progress/set-up-the-rest.R
-  #   dplyr::mutate(Code_sample = factor(Code_sample, 
-  #                                      levels = c("CN25", "CN19", "CN05",
-  #                                                 "CN04", "CN15", "CN07",
-  #                                                 "CN09", "CN03", "CN17",
-  #                                                 "CN08", "CN26", "CN23",
-  #                                                 "CN06", "CN02", "CN16",
-  #                                                 "CN27", "CN10", "CN13",
-  #                                                 "CN22", "CN21", "CN28",
-  #                                                 "CN29", "CN24", "CN11",
-  #                                                 "CN20", "CN18", "CN14",
-  #                                                 "CN01"))) |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Code_sample, y = conc_relative, 
-  #                                  fill = Nutrient), 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_stack()) +
-  #   ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
-  #                                         "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
-  #                                         "#CEC917FF", "#3A160AFF", "#E75B64FF",
-  #                                         "#92BBD9FF", "#D98594FF", "#26432FFF",
-  #                                         "#DE7862FF", "#4C413FFF", "#E8C4A2FF", 
-  #                                         "#2e276a", "#5c4d73", "#D8AF39FF",
-  #                                         "#583B2BFF", "#14191FFF")) +
-  #   ggplot2::ggtitle("Cap Noir") +
-  #   ggplot2::ylab("Relative fraction") +
-  #   ggplot2::xlab("Scat sample") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
-  #                  axis.text.x = ggplot2::element_blank(), 
-  #                  title = ggplot2::element_text(size = 15, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "bottom", 
-  #                  legend.text = ggplot2::element_text(size = 12))
-  # ggplot2::ggsave("output/scat_compo_rel_comp_CapNoir_Agazella_stack_Feorder.jpg",
-  #                 scale = 1,
-  #                 height = 4, width = 6
-  # )
 
-  # # Pointe Suzanne trials 
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")),
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Pointe Suz") |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Nutrient, y = conc_relative), 
-  #                     fill = "#AE93BEFF",
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_dodge(1)) +
-  #   ggplot2::facet_wrap(~ Code_sample) + 
-  #   ggplot2::ggtitle("Pointe Suzanne") +
-  #   ggplot2::ylab("Relative proportion in scats") +
-  #   ggplot2::xlab("Nutrient") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
-  #                  axis.text.y = ggplot2::element_text(size = 14),
-  #                  title = ggplot2::element_text(size = 17, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 16, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 16, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "none")
-  # ggplot2::ggsave("output/scat_compo_rel_comp_PSuz_Agazella_dodge.jpg",
-  #                 scale = 1,
-  #                 height = 6, width = 16
-  # )
-  
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")), 
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Pointe Suz") |>
-  #   # order of samples determined in work-in-progress/set-up-the-rest.R
-  #   dplyr::mutate(Code_sample = factor(Code_sample, 
-  #                                      levels = c("PS31", "PS19", "PS21",
-  #                                                 "PS11", "PS28", "PS17",
-  #                                                 "PS14", "PS07", "PS08",
-  #                                                 "PS25", "PS27", "PS12",
-  #                                                 "PS20", "PS02", "PS18",
-  #                                                 "PS24", "PS29", "PS01",
-  #                                                 "PS03", "PS04", "PS06",
-  #                                                 "PS16", "PS22", "PS10",
-  #                                                 "PS05", "PS30", "PS26",
-  #                                                 "PS13", "PS23", "PS09",
-  #                                                 "PS15"))) |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Code_sample, y = conc_relative, 
-  #                                  fill = Nutrient), 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_stack()) +
-  #   ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
-  #                                         "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
-  #                                         "#CEC917FF", "#3A160AFF", "#E75B64FF",
-  #                                         "#92BBD9FF", "#D98594FF", "#26432FFF",
-  #                                         "#DE7862FF", "#4C413FFF", "#E8C4A2FF", 
-  #                                         "#2e276a", "#5c4d73", "#D8AF39FF",
-  #                                         "#583B2BFF", "#14191FFF")) +
-  #   ggplot2::ggtitle("Pointe Suzanne") +
-  #   ggplot2::ylab("Relative fraction") +
-  #   ggplot2::xlab("Scat sample") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
-  #                  axis.text.x = ggplot2::element_blank(), 
-  #                  title = ggplot2::element_text(size = 15, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "bottom", 
-  #                  legend.text = ggplot2::element_text(size = 12))
-  # ggplot2::ggsave("output/scat_compo_rel_comp_PSuz_Agazella_stack_Caorder.jpg",
-  #                 scale = 1,
-  #                 height = 4, width = 6
-  # )
-  
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb")), 
-  #                 site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-  #                                         stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-  #   dplyr::filter(site == "Pointe Suz") |>
-  #   # order of samples determined in work-in-progress/set-up-the-rest.R
-  #   dplyr::mutate(Code_sample = factor(Code_sample, 
-  #                                      levels = c("PS09", "PS13", "PS23",
-  #                                                 "PS30", "PS16", "PS15",
-  #                                                 "PS05", "PS04", "PS06",
-  #                                                 "PS14", "PS19", "PS29",
-  #                                                 "PS26", "PS31", "PS02",
-  #                                                 "PS03", "PS18", "PS27",
-  #                                                 "PS22", "PS21", "PS20",
-  #                                                 "PS11", "PS24", "PS28",
-  #                                                 "PS12", "PS10", "PS01",
-  #                                                 "PS08", "PS07", "PS17",
-  #                                                 "PS25"))) |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Code_sample, y = conc_relative, 
-  #                                  fill = Nutrient), 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_stack()) +
-  #   ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
-  #                                         "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
-  #                                         "#CEC917FF", "#3A160AFF", "#E75B64FF",
-  #                                         "#92BBD9FF", "#D98594FF", "#26432FFF",
-  #                                         "#DE7862FF", "#4C413FFF", "#E8C4A2FF", 
-  #                                         "#2e276a", "#5c4d73", "#D8AF39FF",
-  #                                         "#583B2BFF", "#14191FFF")) +
-  #   ggplot2::ggtitle("Pointe Suzanne") +
-  #   ggplot2::ylab("Relative fraction") +
-  #   ggplot2::xlab("Scat sample") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
-  #                  axis.text.x = ggplot2::element_blank(), 
-  #                  title = ggplot2::element_text(size = 15, 
-  #                                                face = "bold"),
-  #                  axis.title.x = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  legend.position = "bottom", 
-  #                  legend.text = ggplot2::element_text(size = 12))
-  # ggplot2::ggsave("output/scat_compo_rel_comp_PSuz_Agazella_stack_Feorder.jpg",
-  #                 scale = 1,
-  #                 height = 4, width = 6
-  # )
-  
-  ##### barplot with all scats together, but ordered
-  # scat_compo_tib |>
-  #   dplyr::mutate(sum_nut = P + Ca + Mg + Na + K + Fe + 
-  #                   Zn + Sr + Cu + Mn + Se + Ni + Cd + V + Cr + As + Co +
-  #                   Ag + Pb + Mo) |>
-  #   tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-  #                                Fe, Zn, Sr, Cu, Mn, Se,
-  #                                Ni, Cd, V, Cr, As, Co, 
-  #                                Ag, Mo, Pb), 
-  #                       names_to = "Nutrient", 
-  #                       values_to = "conc_mg_kg_dw") |> 
-  #   dplyr::mutate(conc_relative = conc_mg_kg_dw/sum_nut, 
-  #                 Nutrient = factor(Nutrient, 
-  #                                   levels = c("Ca", "P", "Mg", "Na", "K", 
-  #                                              "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-  #                                              "Ni", "Cd", "V", "Cr", "As", "Co", 
-  #                                              "Ag", "Mo", "Pb"))) |> 
-  #   # order of samples determined in work-in-progress/set-up-the-rest.R
-  #   dplyr::mutate(Code_sample = factor(Code_sample, 
-  #                                      levels = c("CN25", "PS09", "PS13", 
-  #                                                 "PS23", "CN19", "PS30", 
-  #                                                 "CN05", "PS16", "PS15",
-  #                                                 "PS05", "PS04", "CN04", 
-  #                                                 "CN15", "CN07", "CN09", 
-  #                                                 "CN03", "CN17", "PS06",
-  #                                                 "CN08", "CN26", "PS14", 
-  #                                                 "CN23", "CN06", "CN02", 
-  #                                                 "CN16", "CN27", "CN10", 
-  #                                                 "PS19", "CN13", "PS29",
-  #                                                 "PS26", "PS31", "PS02",
-  #                                                 "PS03", "PS18", "PS27",
-  #                                                 "CN22", "CN21", "PS22",
-  #                                                 "CN28", "CN29", "CN24", 
-  #                                                 "CN11", "PS21", "PS20",
-  #                                                 "CN20", "PS11", "PS24", 
-  #                                                 "PS28", "PS12", "PS10", 
-  #                                                 "PS01", "PS08", "CN18", 
-  #                                                 "PS07", "PS17", "PS25",
-  #                                                 "CN14", "CN01"))) |>
-  #   ggplot2::ggplot() +
-  #   ggplot2::geom_bar(ggplot2::aes(x = Code_sample, y = conc_relative, 
-  #                                  fill = Nutrient), 
-  #                     stat = "identity", 
-  #                     position = ggplot2::position_stack()) +
-  #   ggplot2::scale_fill_manual(values = c("#F0D77BFF", "#5A6F80FF","#278B9AFF", 
-  #                                         "#B4DAE5FF", "#6FB382FF", "#AE93BEFF",
-  #                                         "#CEC917FF", "#3A160AFF", "#E75B64FF",
-  #                                         "#92BBD9FF", "#D98594FF", "#26432FFF",
-  #                                         "#DE7862FF", "#4C413FFF", "#E8C4A2FF", 
-  #                                         "#2e276a", "#5c4d73", "#D8AF39FF",
-  #                                         "#583B2BFF", "#14191FFF" 
-  #   )) +
-  #   ggplot2::xlab("Scat sample") +
-  #   ggplot2::theme_bw() +
-  #   ggplot2::theme(axis.text.y = ggplot2::element_text(size = 12), 
-  #                  axis.text.x = ggplot2::element_blank(), 
-  #                  axis.title.x = ggplot2::element_text(size = 14, 
-  #                                                       face = "bold"), 
-  #                  axis.title.y = ggplot2::element_blank(),
-  #                  strip.text.x = ggplot2::element_blank(),
-  #                  strip.placement = "outside",
-  #                  legend.position = "bottom", 
-  #                  legend.text = ggplot2::element_text(size = 12))
-  # ggplot2::ggsave("output/scat_compo_rel_comp_all_scats_stack_Feorder.jpg",
-  #                 scale = 1,
-  #                 height = 7, width = 6
-  # )
-  
   # Site per site, stacked barplot with nutrients separated depending on 
   # relative concentration values and ordered based on Fe relative conc. 
   scat_compo_tib |>
@@ -948,11 +537,11 @@ barplot_nut_scat_compo_relative_sites <- function(scat_compo_tib) {
                    strip.placement = "outside", 
                    legend.position = "bottom", 
                    legend.text = ggplot2::element_text(size = 12))
-  ggplot2::ggsave("output/scat_compo_rel_micro-macro_comp_CNoir_Agazella_stack_Feorder.jpg",
+  ggplot2::ggsave("output/figures-tables-article/scat_compo_rel_micro-macro_comp_CNoir_Agazella_stack_Feorder.jpg",
                   scale = 1,
                   height = 7, width = 6
   )
-  ggplot2::ggsave("output/scat_compo_rel_micro-macro_comp_CNoir_Agazella_stack_Feorder.svg",
+  ggplot2::ggsave("output/figures-tables-article/scat_compo_rel_micro-macro_comp_CNoir_Agazella_stack_Feorder.svg",
                   scale = 1,
                   height = 7, width = 6
   )
@@ -1039,11 +628,11 @@ barplot_nut_scat_compo_relative_sites <- function(scat_compo_tib) {
                    strip.placement = "outside", 
                    legend.position = "bottom", 
                    legend.text = ggplot2::element_text(size = 12))
-  ggplot2::ggsave("output/scat_compo_rel_micro-macro_comp_PSuz_Agazella_stack_Feorder.jpg",
+  ggplot2::ggsave("output/figures-tables-article/scat_compo_rel_micro-macro_comp_PSuz_Agazella_stack_Feorder.jpg",
                   scale = 1,
                   height = 7, width = 6
   )
-  ggplot2::ggsave("output/scat_compo_rel_micro-macro_comp_PSuz_Agazella_stack_Feorder.svg",
+  ggplot2::ggsave("output/figures-tables-article/scat_compo_rel_micro-macro_comp_PSuz_Agazella_stack_Feorder.svg",
                   scale = 1,
                   height = 7, width = 6
   )
@@ -1134,7 +723,7 @@ table_compo_relative_scats_site <- function(scat_compo_tib
                                        Ag, Mo, Pb)))
   
   openxlsx::write.xlsx(table_summary, 
-                       file = paste0("output/table_summary_sites_scat_compo_relative_data.xlsx"))
+                       file = paste0("output/exploration and intermediary results/table_summary_sites_scat_compo_relative_data.xlsx"))
   
 }
 
@@ -1205,7 +794,7 @@ MWtest_scats_compo_relative_sites <- function(scat_compo_tib) {
                                                  TRUE ~ "no"))
   
   openxlsx::write.xlsx(df_test, 
-                       file = "output/Mann_Whitney_test_scats_compo_relative_sites.xlsx")
+                       file = "output/exploration and intermediary results/Mann_Whitney_test_scats_compo_relative_sites.xlsx")
   
 }
 
@@ -1278,7 +867,7 @@ corr_compo_scats <- function(scat_compo_tib) {
                    legend.title = ggplot2::element_text(size = 13), 
                    legend.text = ggplot2::element_text(size = 11), 
                    legend.title.align = 0)
-  ggplot2::ggsave("output/covar_mat_CapNo.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/covar_mat_CapNo.jpg",
                   scale = 1,
                   height = 5, width = 7.5)
   
@@ -1304,7 +893,7 @@ corr_compo_scats <- function(scat_compo_tib) {
                    legend.title = ggplot2::element_text(size = 13), 
                    legend.text = ggplot2::element_text(size = 11), 
                    legend.title.align = 0)
-  ggplot2::ggsave("output/covar_mat_PointeSuz.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/covar_mat_PointeSuz.jpg",
                   scale = 1,
                   height = 5, width = 7.5)
   
@@ -1545,7 +1134,7 @@ covar_diff_sites <- function(scat_compo_tib) {
                    legend.title = ggplot2::element_text(size = 13.5), 
                    legend.text = ggplot2::element_text(size = 11.5), 
                    legend.title.align = 0)
-  ggplot2::ggsave("output/corrplot_diff_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/corrplot_diff_sites.jpg",
                   scale = 1,
                   height = 5, width = 7.5
   )
@@ -1602,7 +1191,7 @@ plot_concentration_vs_water_content <- function(scat_data,
                    strip.text.x = ggplot2::element_blank(),
                    legend.position = "bottom", 
                    legend.text = ggplot2::element_text(size = 12))
-  ggplot2::ggsave("output/concentration_vs_waterp.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/concentration_vs_waterp.jpg",
                   scale = 1,
                   height = 4, width = 10
   )

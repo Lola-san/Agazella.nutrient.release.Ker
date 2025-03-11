@@ -109,7 +109,7 @@ boxplot_compo_clust_PCs <- function(res_clust_PCs,
                                                  face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/clustering with PCs/clust_scat_compo_PCs_CapNoir.jpg",
+  ggplot2::ggsave("output/figures-tables-article/clust_scat_compo_PCs_CapNoir.jpg",
                   scale = 1,
                   height = 7.5, width = 9
   )
@@ -204,7 +204,7 @@ boxplot_compo_clust_PCs <- function(res_clust_PCs,
                                                  face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/clustering with PCs/clust_scat_compo_PCs_PSuzanne.jpg",
+  ggplot2::ggsave("output/figures-tables-article/clust_scat_compo_PCs_PSuzanne.jpg",
                   scale = 1,
                   height = 7.5, width = 9
   )
@@ -677,7 +677,7 @@ table_stats_clust_PCs_per_site <- function(list_res_clust_sites,
                                       values_from = value))
   
   openxlsx::write.xlsx(table, 
-                       file = "output/clustering with PCs/clust_PCs_compo_sites.xlsx")
+                       file = "output/figures-tables-article/clust_PCs_compo_sites.xlsx")
   
   table 
   
@@ -717,7 +717,7 @@ table_compo_clust_PCs_percent_per_site <- function(list_res_clust_sites,
                    dplyr::distinct())
   
   openxlsx::write.xlsx(table, 
-                       file = "output/clustering with PCs/clust_PCs_percent_sites.xlsx")
+                       file = "output/figures-tables-article/clust_PCs_percent_sites.xlsx")
   
   table 
   

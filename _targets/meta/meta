@@ -1,13 +1,13 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 add_bootstrap_scat_data|function|305bba01b7c9023c|||||||||||||||
-barplot_animals_per_site_tot|stem|89ab544d7e991138|ea092581c5c6ecb1|d479d1f03ddb27de|-1873298217||t19816.4859708752s|3e4acf685da8f273|84|rds|local|vector|||0.25||
+barplot_animals_per_site_tot|stem|64b5c47feec3e14a|ea092581c5c6ecb1|699665c5161cb952|-1873298217||t20158.6430585855s|b0efa4f1e05eee68|121|rds|local|vector|||0.93||
 barplot_compo_rel_clust_per_scat|function|f265dfe7cd6e7044|||||||||||||||
-barplot_diff_nut_sites|stem|6b829f069b330c44|54ef39ceee01f9f4|2b3c8c3f0778086a|-1049191965||t20044.613112962s|2247cb837b5b96db|124|rds|local|vector|||2.77||
-barplot_dm_produced_per_site_period|stem|e867c93f2d6a40d2|63b97b9e881c0968|20af71c8a0e089ba|1611808608||t19779.4040608507s|dfd0d40dc0c5171b|95|rds|local|vector|||0.86||
-barplot_nut_release_per_site_tot_period|stem|4161c9912e69c53b|c178bc0668f02e8a|81ae70f2cfdccb3a|148134426||t20044.6048278497s|241bf920421d9078|105|rds|local|vector|||14.53||
+barplot_diff_nut_sites|stem|3a323220f3b38af6|54ef39ceee01f9f4|068c7b84b5854f5d|-1049191965||t20158.643028369s|2caa9f84a7ad3d6c|138|rds|local|vector|||1.52||
+barplot_dm_produced_per_site_period|stem|01b1b0ac61e4c895|63b97b9e881c0968|67fd4933d6e73a4c|1611808608||t20158.6253098169s|bce99b594ffe2eda|128|rds|local|vector|||0.4||
+barplot_nut_release_per_site_tot_period|stem|0b81bb8aeda3ff17|c178bc0668f02e8a|7559dfcee4751596|148134426||t20158.6266135832s|4956b68a23f9e1fc|122|rds|local|vector|||8.47||
 barplot_nut_scat_compo_relative_clust|function|73b0854beefe8e7a|||||||||||||||
 barplot_nut_scat_compo_relative_clusters|function|36d0abfdee5ab6d7|||||||||||||||
-barplot_nut_scat_compo_relative_sites|function|dc5c048f4e672afb|||||||||||||||
+barplot_nut_scat_compo_relative_sites|function|72c5ca5d60f58e65|||||||||||||||
 barplot_scat_compo_rel_PCs_clust|stem|802eb2cf9f9d67e5|00d12904cac8ec2e|8d7ba3094468ccd9|-1351040117||t19865.5024016095s|083ed7cd5fdca87c|132|rds|local|vector|||1.25||
 biplot_after_clust|function|a104d05e358c507f|||||||||||||||
 biplot_pca|stem|20e78dde17594097|9811c3f2daf79df3|29db5f7c9b33f44d|968598216||t19865.5022906715s|bdb532178c146fbe|104|rds|local|vector|||1.11||
@@ -16,17 +16,17 @@ biplot_scat_samples_PCs_clust|stem|65db8ed00ac258ed|2eb3bae89c85b55a|b57aa86434e
 bowieetal2015_data|function|a10ce7ac6b88077e|||||||||||||||
 boxplot_compo_clust|function|2fd78068c8119a51|||||||||||||||
 boxplot_compo_clust_full_tib|function|1a0f44fec15d1fdc|||||||||||||||
-boxplot_compo_clust_PCs|function|5a9f41b6e6643b62|||||||||||||||
-boxplot_compo_scats_site|function|5ab37f76fae3dcaa|||||||||||||||
+boxplot_compo_clust_PCs|function|b69a2e8f6fe42abb|||||||||||||||
+boxplot_compo_scats_site|function|d9a9f8d5fdf2ae8e|||||||||||||||
 boxplot_grouped_compo_clust_PCs|function|9c30c5acec355d91|||||||||||||||
 boxplot_grouped_scat_compo_PCs_clust|stem|a1f68e667c55bff6|3a55b2adda14ea36|dae3750aa017152c|426746456||t20044.5890570087s|045b07e719c4cc68|120|rds|local|vector|||19.1||
 boxplot_id_outliers_stats|function|479a4afa4a0e7818|||||||||||||||
 boxplot_only_compo_scats_site|function|46222e8790374fdc|||||||||||||||
-boxplot_only_scat_compo_in_sites|stem|c73ff5f30d79107a|b1fe5ad2ecf1b865|80d6c55d0c45ee23|1776893497||t19865.502227356s|8fcb0666863d3c08|92|rds|local|vector|||2.28|The fun.y argument of stat_summary is deprecated as of ggplot2 3.3.0.ℹ Please use the fun argument instead.. The dotdot notation ..y.. was deprecated in ggplot2 3.4.0.ℹ Please use after_staty instead.|
+boxplot_only_scat_compo_in_sites|stem|1260a4c8ef0d33e0|b1fe5ad2ecf1b865|2d3016dc30498e71|1776893497||t20158.6250494013s|82334e57b39f02e1|127|rds|local|vector|||2.37|The fun.y argument of stat_summary is deprecated as of ggplot2 3.3.0.ℹ Please use the fun argument instead.. The dotdot notation ..y.. was deprecated in ggplot2 3.4.0.ℹ Please use after_staty instead.|
 boxplot_outliers_scats_stats|stem|2800a8e04d8f1a95|67fae48f2502d973|02950c069873056a|-1422857627||t19804.4461674254s|41200f7f0df0ebd3|96|rds|local|vector|||2||
-boxplot_scat_compo_in_sites|stem|1220a38a51ab7688|7079e5ab158428cd|8a72a9071ca8bb5a|-930079913||t19865.4966058257s|9903306e1685fb67|94|rds|local|vector|||4.15|The fun.y argument of stat_summary is deprecated as of ggplot2 3.3.0.ℹ Please use the fun argument instead.. The dotdot notation ..y.. was deprecated in ggplot2 3.4.0.ℹ Please use after_staty instead.. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals|
-boxplot_scat_compo_PCs_clust|stem|33467aeaffba4cda|5ae8027cf2511dc0|90c8a2ce23b06a7a|1567889758||t20044.587005083s|4ff05336d644dae2|106|rds|local|vector|||15.3||
-boxplot_violon_compo_scats_site|function|bb68c6b28f086667|||||||||||||||
+boxplot_scat_compo_in_sites|stem|65c4e536b1de9f26|7079e5ab158428cd|2696bc973e24e0a5|-930079913||t20158.6423268737s|82334e57b39f02e1|127|rds|local|vector|||3.27|The fun.y argument of stat_summary is deprecated as of ggplot2 3.3.0.ℹ Please use the fun argument instead.. The dotdot notation ..y.. was deprecated in ggplot2 3.4.0.ℹ Please use after_staty instead.. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals. position_dodge requires nonoverlapping x intervals|
+boxplot_scat_compo_PCs_clust|stem|33467aeaffba4cda|5ae8027cf2511dc0|2be33be53dfee2ff|1567889758||t20158.6423995377s|4ff05336d644dae2|106|rds|local|vector|||5.27||
+boxplot_violon_compo_scats_site|function|84d5967c69673dac|||||||||||||||
 clean_scats_compo_from_outliers|function|28f4dbc5830824aa|||||||||||||||
 clust_all_nut|stem|c50d00086c5a2cf9|9aede942b00537a0|ff8c3d32489e72c5|-1169516727||t19865.5022592486s|a4142291f08f09a4|7637|rds|local|vector|||0.13||
 clust_all_nut_all_scats|stem|dd82d5d1e2adcd38|f90fe71c65d42ce5|8a7763a9a44c470c|-957113652||t19793.3661337891s|2ae1e1039b19343b|2519|rds|local|vector|||0.13||
@@ -60,31 +60,31 @@ clust_PCs_findk_table|stem|2931f1fb0853fc97|fa8fb988bbedf2ad|f95681851d7dd15a|11
 clust_PCs_samples|function|97421002c71c36f7|||||||||||||||
 clust_samples|function|3913561dde50a0c3|||||||||||||||
 compute_nut_release|function|1a2ed00dcace32e6|||||||||||||||
-conc_vs_water_plot|stem|62520e00c305a096|cadfa44f8c245107|bf73c20b8cfdad1b|89197950||t19865.4964436143s|e7d9c43b1c994be3|87|rds|local|vector|||1.55||
+conc_vs_water_plot|stem|40c4555560589728|cadfa44f8c245107|0369f10d750540a0|89197950||t20158.6250154564s|6556730b296d7213|119|rds|local|vector|||1.57||
 corr_compo_clusters|function|d6eff86ac9c3429e|||||||||||||||
-corr_compo_scats|function|2a5c1a7b5b927e96|||||||||||||||
-corr_mat_diff_covar_sites|stem|39764c2542cc3c9b|999f5dba08660cdd|d586a2558dd752f7|1354080472||t19865.5021949089s|40b3a10246f0095b|83|rds|local|vector|||3.6||
-corr_mat_sites|stem|8cf5542a6d64cc8f|09ab0de2aba00ec2|16641e884853390e|-1720524737||t19865.4964256201s|40b3a10246f0095b|83|rds|local|vector|||7.41||
+corr_compo_scats|function|e85aec2e40bc2ae2|||||||||||||||
+corr_mat_diff_covar_sites|stem|204bc50859feae15|999f5dba08660cdd|85fb9fec54d036b7|1354080472||t20158.6251295405s|6556730b296d7213|119|rds|local|vector|||3.56||
+corr_mat_sites|stem|f3a3c112b02abed1|09ab0de2aba00ec2|b678b18d7670dcd4|-1720524737||t20158.6422887543s|f21b4888ae8bdafc|118|rds|local|vector|||6.91||
 corrmat_clusters|stem|d31eedc8ba1385f4|9043e5ba529bf4ca|069cb3fc155c9b6d|1297359707||t19865.5024249909s|a1c456b03adbfbf8|44|rds|local|vector|||2.02||
 corrmat_comp_clusters_sites_CN_PS1|stem|91a8c273b44e7639|45054af75abba316|aba1c4e2684e5d79|1584201813||t19865.5060774304s|9935591c0ed1d478|103|rds|local|vector|||0.57||
 corrmat_comp_clusters_sites_CN2_PS3|stem|64eec8240a2b3e10|3d986495e36f240e|aba1c4e2684e5d79|-242808114||t19865.5060582937s|bdb532178c146fbe|104|rds|local|vector|||4.66||
 corrmat_comp_clusters_sites_CN3_PS4|stem|7d8b33d63a873ca9|28388a55861fd594|aba1c4e2684e5d79|-1320841457||t19865.5060831813s|bdb532178c146fbe|104|rds|local|vector|||0.49||
 covar_changes_close_clusters|function|672353d26d960128|||||||||||||||
-covar_diff_sites|function|f4c09c6017b0bdb7|||||||||||||||
+covar_diff_sites|function|916aa232c0001c2d|||||||||||||||
 data_counts_file|stem|0b9bfd6d4b707b8a|f5f0795cb8126312|ef46db3751d8e999|-1454308327|data/counts_Ker_2022-2023_compiled.xlsx|t19601.2764067736s|d170b2faf54ca9cf|14544|file|local|vector|||0||
 data_counts_raw|stem|19b460b80c5ade3c|0a0fb1a24eeb5558|728470892f5ea65e|-223022728||t19779.3346358869s|b4f98fd62998258a|1297|rds|local|vector|||0.31||
 data_scat_file|stem|d64712b10ba548f2|8848b84a38302269|ef46db3751d8e999|-1035777537|data/data_scats.xlsx|t19536.5085527454s|c6b6eef0b66078fe|18678|file|local|vector|||0||
 data_scat_samples|stem|da7aef134c27ec2a|9fde1e2e358d3285|ecb22b41d6c3af48|-883390023||t19776.3478701837s|459e154942e728eb|4357|rds|local|vector|||0.05||
 data_scat_summary|stem|359b8bdbaa963616|ebd61abdbe10789a|4c0aa6d5f682eafa|1454070761||t19776.3534911098s|3e86f5f7cb938acd|166752|rds|local|vector|||0.17||
-diff_sites_release_levels_nutrients|function|ed47759c2ad6df30|||||||||||||||
-dm_per_site_period|function|75e87aec1b436f4f|||||||||||||||
+diff_sites_release_levels_nutrients|function|817f5dc20894a45f|||||||||||||||
+dm_per_site_period|function|08e82c89cae6ca49|||||||||||||||
 fig_nut_scat_compo_relative|function|1f2c3917dd27bdd2|||||||||||||||
 fig_nut_scat_compo_relative_clust|function|af26e47928aa98ed|||||||||||||||
 fig_nut_scat_compo_relative_comp_pinn|function|3d7cce636947cdbb|||||||||||||||
 fig_nut_scat_compo_relative_sites|function|d483c2c0bb3a1d52|||||||||||||||
 fig_nut_scat_compo_relative_sites_FeZnCu_MnSeCo|function|72cd7298181ab3cb|||||||||||||||
-fig_scat_compo_rel|stem|c90764dd72d9c312|e5bce0091867219c|4265a525a3c37b4f|-781136876||t19865.5022389s|0882e6a17b20e3e6|59342|rds|local|vector|||0.32||
-fig_scat_compo_rel_sites|stem|b6c9d0a72f7c5286|563bf29534de3e1a|91ec20a1ca372212|166038836||t20044.5798948544s|6556730b296d7213|119|rds|local|vector|||11.28||
+fig_scat_compo_rel|stem|a652b788d83e9f04|e5bce0091867219c|0292f072c6582ac2|-781136876||t20158.6251335003s|186e6d4bc8ba0adc|61440|rds|local|vector|||0.3||
+fig_scat_compo_rel_sites|stem|4300b4df256e1c34|563bf29534de3e1a|eb0c6975b0ac3405|166038836||t20158.6250880197s|094cdf8ee71e1e88|135|rds|local|vector|||3.3||
 hist_id_outliers|function|25fd18d57679552e|||||||||||||||
 hist_outliers_scats_tech|stem|90ac01663d3ee6f7|4e4be240356682c9|f5897567f875f427|887822364||t19804.4476434728s|bb4e721372eac6a0|88|rds|local|vector|||1.86||
 hypo_scats|function|b8956dc121931c50|||||||||||||||
@@ -92,10 +92,10 @@ hypothetical_scats|stem|507569d7ec6bae50|f93eec62f0d1919e|feb91f862165a17e|10247
 Ker_summarise_count_data|function|302a1a452c1329d8|||||||||||||||
 Ker_summarise_count_data109|function|101125e25075c31d|||||||||||||||
 kleiber_sea_land|function|1613681fc163ced1|||||||||||||||
-list_pca|stem|dfecd7873ddef7d3|6478ff371af61f06|bb660b32e0e744a5|1825412053||t19865.5022415101s|cd7f33dfc0dff612|28451|rds|local|vector|||0.2|n  2  p, i.e., possibly too small sample size. n  2  p, i.e., possibly too small sample size|
+list_pca|stem|dfecd7873ddef7d3|6478ff371af61f06|bb660b32e0e744a5|1825412053||t20158.6423317287s|cd7f33dfc0dff612|28451|rds|local|vector|||0.39|n  2  p, i.e., possibly too small sample size. n  2  p, i.e., possibly too small sample size|
 list_pop_data_with_indi_data|stem|2b1cfeeebec49ecf|fea67dce0c2cc83c|24473cce89b6a850|1786979247||t19779.3373975537s|e0117a50d23d798a|438155573|rds|local|vector|||42.27||
 load_xl|function|9a51ae54bd45d9d4|||||||||||||||
-mean_scat_compo_relative_sites|function|09dcbc304128833b|||||||||||||||
+mean_scat_compo_relative_sites|function|3977a5b8341b8ac2|||||||||||||||
 means_clust_find_k_val|function|ded70e5c7566628b|||||||||||||||
 means_clust_find_k_val_full_tib|function|f77bbadfece4c0ab|||||||||||||||
 MWtest_clust_k3|function|e21e72c1767299c4|||||||||||||||
@@ -105,10 +105,10 @@ MWtest_clust_k34_full_tib|function|2103863e035ef1ee|||||||||||||||
 MWtest_clust_k4|function|3e4d7bc09b772e6b|||||||||||||||
 MWtest_clust_k43_full_tib|function|7234ba1a25551fb2|||||||||||||||
 MWtest_clust_k5|function|a892e16e66e1ff68|||||||||||||||
-MWtest_scats_compo_relative_sites|function|cb66bc0443534a86|||||||||||||||
+MWtest_scats_compo_relative_sites|function|abcc0f0d7cceedac|||||||||||||||
 MWtest_scats_compo_sites|function|24da4605e642e84a|||||||||||||||
-nb_animals_per_site_simulated|function|cd365b0140c6dbed|||||||||||||||
-nut_per_site_tot_period|function|6ac9a94b28ef4bc3|||||||||||||||
+nb_animals_per_site_simulated|function|4d06b3359bc41218|||||||||||||||
+nut_per_site_tot_period|function|c1e897ce3301ce6b|||||||||||||||
 oceanographic_clean_data_Bowieetal2015|stem|241ba27f98623eaa|41a25cd7a18d4407|fa8db3d5a0916735|-1295752173||t20157.6653569718s|a1eb2c1cc7ef6b38|294|rds|local|vector|||0.25||
 oceanographic_raw_data_Bowieetal2015|stem|4890ae8f43a9ced7|a6e6370206fd204e|cc9ca683cf93293c|156193446||t20157.6653531637s|f008763eb0bfd232|318|rds|local|vector|||0||
 output_dm_produced_CN|stem|ddd0b35b7dbf5677|05dd2f4508ff1979|3a44628eb387fac2|-1534847407||t19779.3891039034s|84516a847f21505b|393552977|rds|local|vector|||20.78||
@@ -118,7 +118,7 @@ output_dm_produced_with_scat_compo_data_PS|stem|613fe5a890861fa4|be663eceb0f09d7
 output_nut_release_CN|stem|f829631c87ed9c1a|ce00f0d5bc97e1e1|4cb9889017918801|1477783442||t19816.4359787599s|a164e46ed6bd0a19|2390435293|rds|local|vector|||593.64||
 output_nut_release_PS|stem|686d457125826b3a|63d4e51cd046a33c|2792538408e83ea7|1641922471||t19816.4857725974s|bd68a6377c8acd20|3712831840|rds|local|vector|||4131.15||
 pca_coda|function|c8e44a26ce6daca2|||||||||||||||
-plot_concentration_vs_water_content|function|b3641c4e2a363bde|||||||||||||||
+plot_concentration_vs_water_content|function|0cc8a78cf2456119|||||||||||||||
 plot_pop_data_simu|function|e0c46eeb2351abdf|||||||||||||||
 pop_counts_summary|stem|00342ba03ffb5397|153e9a51b76fa376|1547b352d572b5f1|950328121||t19779.3346429658s|f008763eb0bfd232|318|rds|local|vector|||0.6||
 pop_data_for_simulations|function|0860632f1686e581|||||||||||||||
@@ -139,40 +139,40 @@ set_up_scats_compo_clust|function|295629aa0792748c|||||||||||||||
 set_up_scats_compo_part2|function|c7d5d382a58fca7f|||||||||||||||
 simulate_count_data|function|041f0ecc797998fd|||||||||||||||
 summary_scat_samples|function|0e69e8dbe237eb55|||||||||||||||
-table_compo_clust_PCs_percent_per_site|function|9c92c4ff4510d243|||||||||||||||
+table_compo_clust_PCs_percent_per_site|function|b5a8f38d1a619d93|||||||||||||||
 table_compo_clust_per_site|function|161a29fa24a942b7|||||||||||||||
 table_compo_clust_percent_per_site|function|161a29fa24a942b7|||||||||||||||
-table_compo_relative_scats_site|function|673aec6bff8bc3d0|||||||||||||||
-table_compo_scats_site|function|62e797ef1ce574db|||||||||||||||
-table_model_param|function|aca70ea4d934004c|||||||||||||||
+table_compo_relative_scats_site|function|6396ba5a6707afd0|||||||||||||||
+table_compo_scats_site|function|3de2ca9ea0a047d9|||||||||||||||
+table_model_param|function|7bce499b55db53ed|||||||||||||||
 table_nut_enrichment_at_sea|function|0c18aefdc70214e9|||||||||||||||
-table_nut_per_site_sea_land_period|function|f3f70fd500d18970|||||||||||||||
-table_nut_release_per_site_period|stem|8f5ea472fad4bcca|4262e31a8db7e337|c582aff7e3a35942|-1177039822||t19865.5090656266s|6c70055c642c33b3|163220|rds|local|vector|||57.64||
-table_stats_clust_PCs_per_site|function|b018af46506be94b|||||||||||||||
+table_nut_per_site_sea_land_period|function|8054814c130d94cc|||||||||||||||
+table_nut_release_per_site_period|stem|dbce9813232c2368|4262e31a8db7e337|601b4495c89a06c9|-1177039822||t20158.6272986269s|a1548c832d0c1d19|163219|rds|local|vector|||59.08||
+table_stats_clust_PCs_per_site|function|90f967e75ab3aa58|||||||||||||||
 table_stats_clust_per_site|function|e60dd6441a25ee66|||||||||||||||
 table_stats_clust_per_site_full_tib|function|463dc7fe500d997d|||||||||||||||
 table_stats_clusts_all_nut|stem|5f846ea3bab51a96|dc6027106dbff834|c1cefb52725accfc|-1405117868||t19865.5023724689s|81944581974c7b2b|4131|rds|local|vector|||0.26||
 table_stats_clusts_all_nut_sites|stem|b800cf7e71fbdf63|e41e7319f6f2f797|c96a77220dea75d7|481477335||t19793.3726684694s|6780c20ed7ba8483|607|rds|local|vector|||0.95||
-table_summary_model_param|stem|11e2fb08daa2ceb8|6a12feb748ab1f31|e81acd00c7a9aab0|2045071414||t19779.4040467571s|7cbbd10aac33c15a|160282|rds|local|vector|||19.91||
-table_summary_scat_compo_in_sites|stem|965a54b7afcdf04d|f03fb24f1947e963|b99480bba10ae845|163792229||t19865.5022309495s|39a9088c53750485|161968|rds|local|vector|||0.23||
-table_summary_scat_compo_rel_in_sites|stem|44716671b680549c|93fef263274f402a|011bc990fdf66a82|123483431||t19865.5022009171s|c7b42567c38c4cce|161625|rds|local|vector|||0.42||
+table_summary_model_param|stem|742dc4523ba42d39|6a12feb748ab1f31|e72fab6710f98782|2045071414||t20158.6256587385s|7cbbd10aac33c15a|160282|rds|local|vector|||29.97||
+table_summary_scat_compo_in_sites|stem|4436f9af00a775d8|f03fb24f1947e963|97c88ae664503c76|163792229||t20158.6138387s|39a9088c53750485|161968|rds|local|vector|||0.27||
+table_summary_scat_compo_rel_in_sites|stem|a3237e66ffa82892|93fef263274f402a|ca1e4e28637d783b|123483431||t20158.6250218634s|c7b42567c38c4cce|161625|rds|local|vector|||0.46||
 table_test_clust_all_nut_sites|stem|f3c4656d6d6db4d7|cd27358228d175e8|3a009701f06b1f77|-737854694||t19865.5023693016s|c65abe85606790c4|162963|rds|local|vector|||0.61|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue e|
 table_test_clust_PCs_k3_sites|stem|81b1b65cb9178e22|d94ffbecb7f6db7e|9a4e91bce4eabb65|858526082||t19808.6417114191s|5b7de1a8eeb7d237|1937|rds|local|vector|||0.58|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
 table_test_clust_PCs_k34_sites|stem|cfc326414edf6707|629df10d716be713|e47400c9cd1f30e5|-1109278975||t19865.5060707683s|d25bce9f2dae95c3|2370|rds|local|vector|||1.06|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue e|
 table_test_clust_PCs_k4_sites|stem|7af1642f378ba894|6e61bcf1a9995ce8|4cac0851b34c83c6|185981158||t19808.6683405762s||2860|rds|local|vector|||0.12|Unknown or uninitialised column 4.|x doit être numérique
 table_test_clust_PCs_k5_sites|stem|41e6951cbc03817b|650e4ff479bd0af2|b1bf98d8eb3fb0a0|1010962440||t19808.5841838334s|e911a31210a166b7|3250|rds|local|vector|||0.7|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue e|
 table_test_clust_PCs_sites|stem|26da95d12ca6db98|6e61bcf1a9995ce8|11782a4951b29dd7|-178063067||t19808.5307660085s|bf9c19f7df7e9c0c|2189|rds|local|vector|||0.6|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
-table_test_dm_release_per_site_tot_period|stem|3b20137f620fafeb|4d665416f01778e9|a562b74dd5082210|-377898853||t19779.4040507836s|c660632b73ee91cf|159253|rds|local|vector|||0.13||
-table_test_nut_release_per_site_tot_period|stem|07dfba4b88d2dca8|b21cdb483fe8fd3c|b7562a5de8f3b9b1|-1091176206||t19865.5082854678s|6861b5eec23fc30f|159584|rds|local|vector|||2||
-table_test_scat_compo_rel_sites|stem|c56232392f12582a|56dee1fddea2adf6|36ac84c56169b368|-381529584||t19865.4965575443s|6e0d47557114de1b|159833|rds|local|vector|||0.52||
+table_test_dm_release_per_site_tot_period|stem|6fb9138ccb0fede9|4d665416f01778e9|e581014a335eb9e0|-377898853||t20158.625304927s|c660632b73ee91cf|159253|rds|local|vector|||0.13||
+table_test_nut_release_per_site_tot_period|stem|6ef4a4ed57a827b2|b21cdb483fe8fd3c|8d134b97ce031f93|-1091176206||t20158.6430473493s|6861b5eec23fc30f|159584|rds|local|vector|||1.4||
+table_test_scat_compo_rel_sites|stem|a92f30c42741f3f7|56dee1fddea2adf6|27f2f5cfa58b9c08|-381529584||t20158.6251459357s|6e0d47557114de1b|159833|rds|local|vector|||0.36||
 table_test_scat_compo_sites|stem|48037f13a9c6e40c|e9df9611edf5e37d|ecf07581eccbf802|-745729489||t19865.5022348803s|0ec60e834876f460|159863|rds|local|vector|||0.28|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
 tables_scat_samples_all_nut_clust_attribution|stem|2aee677d93ec2747|fe782fb0b7060868|d79a253c9617ce02|-677289792||t19865.5022937006s|2d377f16121d3334|167753|rds|local|vector|||0.19||
 tables_scat_samples_clust_attribution|stem|388829814e769fcc|7c5696fc0f42b552|0077060df6270dfb|1062083919||t19793.5691608151s|27750a258fc72963|165100|rds|local|vector|||0.21|impossible de créer le fichier outputclustering with all nutrientsclust_attribution_PS.xlsx, à cause de Permission denied|
 tables_scat_samples_PCs_clust_attribution|stem|101687bd14f128f9|c5dbd53da3436d97|e91a136c3f5fc87a|1892437888||t19865.5023761306s|f0fe7462e331abc1|167749|rds|local|vector|||0.22||
-tables_scat_samples_PCs_clust_percents|stem|cfe08f96649a6111|3bc9db639c11439d|f41f14c95d9f6add|883506255||t19865.5024263774s|6e2ad1e2d4a7cab8|275|rds|local|vector|||0.11||
-tables_scat_samples_PCs_clust_stats|stem|cefce35ffe42dbfd|e01f03bc2d3f28ab|c4a2c836ecda00d4|1208041906||t19865.5060866711s|a5f3731c2f24e668|3981|rds|local|vector|||0.29||
-test_diff_dm_sites_tot_period|function|5eb8fb29dc053e58|||||||||||||||
-test_nut_sites_tot_period|function|b4cd8052a46f065f|||||||||||||||
+tables_scat_samples_PCs_clust_percents|stem|cfe08f96649a6111|3bc9db639c11439d|fbebb9e60e577520|883506255||t20158.6423383851s|6e2ad1e2d4a7cab8|275|rds|local|vector|||0.11||
+tables_scat_samples_PCs_clust_stats|stem|cefce35ffe42dbfd|e01f03bc2d3f28ab|e309523d102e9f20|1208041906||t20158.6423367739s|a5f3731c2f24e668|3981|rds|local|vector|||0.39||
+test_diff_dm_sites_tot_period|function|47221e9da8c2927d|||||||||||||||
+test_nut_sites_tot_period|function|fa07c8e8c842ffb2|||||||||||||||
 tib_id_outliers|function|098943e69a6c81bf|||||||||||||||
 tib_id_stat_outliers|function|a4526dd5ab1add1b|||||||||||||||
 tib_outliers_scats_stats|stem|1d80b3d210326e5c|38d0549ed12f7f4e|5990df13cd6f2d09|948455351||t19804.4476474839s|0e1d1299899a0271|161707|rds|local|vector|||0.26||

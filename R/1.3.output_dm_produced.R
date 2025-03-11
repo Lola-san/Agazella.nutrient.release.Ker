@@ -69,7 +69,7 @@ dm_per_site_period <- function(output_dm_CN,
                                                         face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/barplot_dm_release_tot_pop_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/barplot_dm_release_tot_pop_sites.jpg",
                   scale = 1,
                   height = 4, width = 9
   )
@@ -107,7 +107,7 @@ test_diff_dm_sites_tot_period <- function(output_dm_CN,
     dplyr::summarise(test_dm_sites = mean(t_PS_CN))
   
   openxlsx::write.xlsx(table_test, 
-                       file = paste0("output/test_differences_sites_dm.xlsx"))
+                       file = paste0("output/exploration and intermediary results/test_differences_sites_dm.xlsx"))
   
 }
 
@@ -297,7 +297,7 @@ table_model_param <- function(output_dm_CN,
     )
   
   openxlsx::write.xlsx(table_summary_model_param,
-                       file = "output/table_summary_model_parameters.xlsx")
+                       file = "output/exploration and intermediary results/table_summary_model_parameters.xlsx")
   
   
 }

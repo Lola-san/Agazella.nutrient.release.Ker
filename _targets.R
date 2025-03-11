@@ -57,6 +57,7 @@ list(
              clean_scats_compo_from_outliers(res_compo_scats_LOQ_OK)), 
   
   ##--------------- script 0.2.scats_compo_sites.R -----------------------##
+  # results' exploration and summaries
   # nutrient composition of scats as in the dataset
   tar_target(boxplot_scat_compo_in_sites,
              boxplot_violon_compo_scats_site(res_compo_scats)),
@@ -104,11 +105,10 @@ list(
   # prepare full dataset with colony counts and bioenergetic data
   tar_target(pop_initial_count_data,
              simulate_count_data(pop_counts_summary)),
+  # because of memory limit, we'll split everything for each site
   tar_target(list_pop_data_with_indi_data, # now a list with data for the two sites
              pop_data_for_simulations(pop_initial_count_data,
                                       nsim = 5000)),
-
-  # because of memory limit, we'll split everything for each site
   tar_target(pop_data_with_indi_data_CN, list_pop_data_with_indi_data$CN),
   tar_target(pop_data_with_indi_data_PS, list_pop_data_with_indi_data$PS),
 
@@ -120,7 +120,6 @@ list(
              run_dm_estimate(pop_data_with_indi_data_PS)),
 
   # script 1.3.output_dm_produced.R
-
   tar_target(barplot_dm_produced_per_site_period,
              dm_per_site_period(output_dm_produced_CN,
                                 output_dm_produced_PS)),
@@ -164,56 +163,56 @@ list(
   
   ####################### THIRD ANALYSIS : SCAT CLUSTERING  ####################
   ##############################################################################
-  ######################## USING ALL NUTRIENTS #################################
-  # script 3.1.clustering_scats_sites.R
-  ### without using a PCA to reduce dimensions
-  # handle statistical outliers 
+  # handle statistical outliers
   tar_target(res_compo_scats_clustering,
               set_up_scats_compo_clust(res_compo_scats)),
-  tar_target(clust_all_nut_findk_table,
-             clust_find_k_table_full_tib(res_compo_scats_clustering,
-                                         method = "ward.D2",
-                                         k_range = c(2:10))),
-  tar_target(clust_all_nut_findk_means_plot,
-             means_clust_find_k_val_full_tib(clust_all_nut_findk_table)),
-  # dendrogram ##### DID NOT FIND A WAY TO MAKE A DENDROGRAM WITH GGPLOT
-  # WITH HCLUST OUTPUT OF RobComposition PACKAGE so it's not pretty
-  # but still we can identify samples in clusters...
-  tar_target(clust_all_nut_dendro,
-             clust_compo_dendro_full_tib(clust_all_nut,
-                                         res_compo_scats_clustering)),
-
-  tar_target(clust_all_nut,
-             clust_compo_full_tib(res_compo_scats_clustering,
-                                  k = c(3, 4, 7),
-                                  method = "ward.D2")),
-  
-  # script 3.2.output_clustering_scats_sites.R
-  # boxplots
-  tar_target(clust_all_nut_boxplot,
-             boxplot_compo_clust_full_tib(clust_all_nut,
-                                          res_compo_scats_clustering)),
-
-  # # barplot with relative composition per scat with cluster coloring
-  # tar_target(clust_all_nut_sites_barplot_rel,
-  #            barplot_nut_scat_compo_relative_clust(clust_all_nut_sites,
-  #                                                  res_compo_scats_clustering)),
-  # tar_target(clust_all_nut_all_scats_barplot_rel,
-  #            barplot_nut_scat_compo_relative_clust(clust_all_nut_all_scats,
-  #                                                  res_compo_scats_clustering)),
-  # tables
-  tar_target(table_stats_clusts_all_nut,
-             table_stats_clust_per_site_full_tib(clust_all_nut,
-                                                 res_compo_scats_clustering)),
+  # ######################## USING ALL NUTRIENTS #################################
+  # # script 3.1.clustering_scats_sites.R
+  # ### without using a PCA to reduce dimensions
+  # tar_target(clust_all_nut_findk_table,
+  #            clust_find_k_table_full_tib(res_compo_scats_clustering,
+  #                                        method = "ward.D2",
+  #                                        k_range = c(2:10))),
+  # tar_target(clust_all_nut_findk_means_plot,
+  #            means_clust_find_k_val_full_tib(clust_all_nut_findk_table)),
+  # # dendrogram ##### DID NOT FIND A WAY TO MAKE A DENDROGRAM WITH GGPLOT
+  # # WITH HCLUST OUTPUT OF RobComposition PACKAGE so it's not pretty
+  # # but still we can identify samples in clusters...
+  # tar_target(clust_all_nut_dendro,
+  #            clust_compo_dendro_full_tib(clust_all_nut,
+  #                                        res_compo_scats_clustering)),
+  # 
+  # tar_target(clust_all_nut,
+  #            clust_compo_full_tib(res_compo_scats_clustering,
+  #                                 k = c(3, 4, 7),
+  #                                 method = "ward.D2")),
+  # 
+  # # script 3.2.output_clustering_scats_sites.R
+  # # boxplots
+  # tar_target(clust_all_nut_boxplot,
+  #            boxplot_compo_clust_full_tib(clust_all_nut,
+  #                                         res_compo_scats_clustering)),
+  # 
+  # # # barplot with relative composition per scat with cluster coloring
+  # # tar_target(clust_all_nut_sites_barplot_rel,
+  # #            barplot_nut_scat_compo_relative_clust(clust_all_nut_sites,
+  # #                                                  res_compo_scats_clustering)),
+  # # tar_target(clust_all_nut_all_scats_barplot_rel,
+  # #            barplot_nut_scat_compo_relative_clust(clust_all_nut_all_scats,
+  # #                                                  res_compo_scats_clustering)),
+  # # tables
+  # tar_target(table_stats_clusts_all_nut,
+  #            table_stats_clust_per_site_full_tib(clust_all_nut,
+  #                                                res_compo_scats_clustering)),
+  # # tar_target(table_test_clust_all_nut_sites,
+  # #            MWtest_clust_k33_full_tib(clust_all_nut_sites,
+  # #                                      res_compo_scats)),
+  # tar_target(tables_scat_samples_all_nut_clust_attribution,
+  #            clust_full_tib_samples(clust_all_nut,
+  #                                   res_compo_scats_clustering)), 
   # tar_target(table_test_clust_all_nut_sites,
-  #            MWtest_clust_k33_full_tib(clust_all_nut_sites,
-  #                                      res_compo_scats)),
-  tar_target(tables_scat_samples_all_nut_clust_attribution,
-             clust_full_tib_samples(clust_all_nut,
-                                    res_compo_scats_clustering)), 
-  tar_target(table_test_clust_all_nut_sites,
-             MWtest_clust_k34_full_tib(clust_all_nut,
-                                       res_compo_scats_clustering)),
+  #            MWtest_clust_k34_full_tib(clust_all_nut,
+  #                                      res_compo_scats_clustering)),
   
   ################ USING PCA FIRST TO REDUCE DIMENSIONS ########################
   # PCA and clustering, script 3.1.clustering_scats_sites.R
@@ -323,12 +322,7 @@ list(
   tar_target(relative_enrichment_at_sea_figures, 
              relative_enrichment(oceanographic_clean_data_Bowieetal2015, 
                                  hypothetical_scats)) 
-  
-  # estimate possible Fe enrichment in tot Fe provoked by one scat around Kerguelen
-  # tar_target(relative_enrichement_around_Ker_tib,
-  #            table_nut_enrichment_at_sea(data_scat_samples, 
-  #                                        res_compo_scats))
-  
+
 )
 
 

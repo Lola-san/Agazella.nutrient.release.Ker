@@ -81,7 +81,7 @@ nut_per_site_tot_period <- function(output_nut_release_CN,
                                                         face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/barplot_nut_release_tot_pop_sites_all_scats_mixed.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/barplot_nut_release_tot_pop_sites_all_scats_mixed.jpg",
                   scale = 1,
                   height = 7, width = 8.5
   )
@@ -155,11 +155,11 @@ nut_per_site_tot_period <- function(output_nut_release_CN,
                                                         colour = "white"),
                    strip.background = ggplot2::element_rect(fill = "gray30"),
                    legend.position = "none")
-  ggplot2::ggsave("output/barplot_nut_release_tot_pop_sites_scats_per_site.jpg",
+  ggplot2::ggsave("output/figures-tables-article/barplot_nut_release_tot_pop_sites_scats_per_site.jpg",
                   scale = 1,
                   height = 6.5, width = 11
   )
-  ggplot2::ggsave("output/barplot_nut_release_tot_pop_sites_scats_per_site.svg",
+  ggplot2::ggsave("output/figures-tables-article/barplot_nut_release_tot_pop_sites_scats_per_site.svg",
                   scale = 1,
                   height = 6.5, width = 11
   )
@@ -376,7 +376,7 @@ table_nut_per_site_sea_land_period <- function(output_nut_release_CN,
   
   
   openxlsx::write.xlsx(table_summary_per_site, 
-                       file = paste0("output/table_summary_sites_nut_total_estimates.xlsx"))
+                       file = paste0("output/figures-tables-article/table_summary_sites_nut_total_estimates.xlsx"))
   
   
   
@@ -602,7 +602,7 @@ table_nut_per_site_sea_land_period <- function(output_nut_release_CN,
   
   
   openxlsx::write.xlsx(table_summary_total, 
-                       file = paste0("output/table_summary_total_sites_estimates.xlsx"))
+                       file = paste0("output/figures-tables-article/table_summary_total_sites_estimates.xlsx"))
   
   
 }
@@ -684,7 +684,7 @@ test_nut_sites_tot_period <- function(output_nut_release_CN,
   )
   
   openxlsx::write.xlsx(table_test, 
-                       file = paste0("output/test_differences_sites_with_and_without_all_scats.xlsx"))
+                       file = paste0("output/exploration and intermediary results/test_differences_sites_with_and_without_all_scats.xlsx"))
   
   
   table_test_scat_per_site_only <- rbind(output_nut_release_CN |>
@@ -719,7 +719,7 @@ test_nut_sites_tot_period <- function(output_nut_release_CN,
                                                  TRUE ~ "no"))
   
   openxlsx::write.xlsx(table_test_scat_per_site_only, 
-                       file = paste0("output/test_differences_sites_scats-per-site.xlsx"))
+                       file = paste0("output/figures-tables-article/test_differences_sites_scats-per-site.xlsx"))
   
 }
 
@@ -784,7 +784,7 @@ diff_sites_release_levels_nutrients <- function(output_nut_release_CN,
                                                         face = "bold"),
                    strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57line.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57line.jpg",
                   scale = 1,
                   height = 4, width = 7.5
   )
@@ -840,11 +840,11 @@ diff_sites_release_levels_nutrients <- function(output_nut_release_CN,
                                                         face = "bold"),
                    #strip.text.x = ggplot2::element_text(size = 15),
                    legend.position = "none")
-  ggplot2::ggsave("output/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57_asref.jpg",
+  ggplot2::ggsave("output/figures-tables-article/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57_asref.jpg",
                   scale = 1,
                   height = 4, width = 7.5
   )
-  ggplot2::ggsave("output/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57_asref.svg",
+  ggplot2::ggsave("output/figures-tables-article/barplot_diff_nut_release_tot_pop_from_CNo_to_PSuz_with57_asref.svg",
                   scale = 1,
                   height = 4, width = 7.5
   )
@@ -905,7 +905,7 @@ nb_animals_per_site_simulated <- function(output_nut_release_CN,
                    axis.title.y = ggplot2::element_text(size = 13, 
                                                         face = "bold"),
                    legend.position = "none")
-  ggplot2::ggsave("output/tot_pop_counts_sites.jpg",
+  ggplot2::ggsave("output/exploration and intermediary results/tot_pop_counts_sites.jpg",
                   scale = 1,
                   height = 2, width = 2.5
   )
