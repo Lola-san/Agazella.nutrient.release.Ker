@@ -166,55 +166,8 @@ list(
   # handle statistical outliers
   tar_target(res_compo_scats_clustering,
               set_up_scats_compo_clust(res_compo_scats)),
-  # ######################## USING ALL NUTRIENTS #################################
-  # # script 3.1.clustering_scats_sites.R
-  # ### without using a PCA to reduce dimensions
-  # tar_target(clust_all_nut_findk_table,
-  #            clust_find_k_table_full_tib(res_compo_scats_clustering,
-  #                                        method = "ward.D2",
-  #                                        k_range = c(2:10))),
-  # tar_target(clust_all_nut_findk_means_plot,
-  #            means_clust_find_k_val_full_tib(clust_all_nut_findk_table)),
-  # # dendrogram ##### DID NOT FIND A WAY TO MAKE A DENDROGRAM WITH GGPLOT
-  # # WITH HCLUST OUTPUT OF RobComposition PACKAGE so it's not pretty
-  # # but still we can identify samples in clusters...
-  # tar_target(clust_all_nut_dendro,
-  #            clust_compo_dendro_full_tib(clust_all_nut,
-  #                                        res_compo_scats_clustering)),
-  # 
-  # tar_target(clust_all_nut,
-  #            clust_compo_full_tib(res_compo_scats_clustering,
-  #                                 k = c(3, 4, 7),
-  #                                 method = "ward.D2")),
-  # 
-  # # script 3.2.output_clustering_scats_sites.R
-  # # boxplots
-  # tar_target(clust_all_nut_boxplot,
-  #            boxplot_compo_clust_full_tib(clust_all_nut,
-  #                                         res_compo_scats_clustering)),
-  # 
-  # # # barplot with relative composition per scat with cluster coloring
-  # # tar_target(clust_all_nut_sites_barplot_rel,
-  # #            barplot_nut_scat_compo_relative_clust(clust_all_nut_sites,
-  # #                                                  res_compo_scats_clustering)),
-  # # tar_target(clust_all_nut_all_scats_barplot_rel,
-  # #            barplot_nut_scat_compo_relative_clust(clust_all_nut_all_scats,
-  # #                                                  res_compo_scats_clustering)),
-  # # tables
-  # tar_target(table_stats_clusts_all_nut,
-  #            table_stats_clust_per_site_full_tib(clust_all_nut,
-  #                                                res_compo_scats_clustering)),
-  # # tar_target(table_test_clust_all_nut_sites,
-  # #            MWtest_clust_k33_full_tib(clust_all_nut_sites,
-  # #                                      res_compo_scats)),
-  # tar_target(tables_scat_samples_all_nut_clust_attribution,
-  #            clust_full_tib_samples(clust_all_nut,
-  #                                   res_compo_scats_clustering)), 
-  # tar_target(table_test_clust_all_nut_sites,
-  #            MWtest_clust_k34_full_tib(clust_all_nut,
-  #                                      res_compo_scats_clustering)),
   
-  ################ USING PCA FIRST TO REDUCE DIMENSIONS ########################
+    ################ USING PCA FIRST TO REDUCE DIMENSIONS ########################
   # PCA and clustering, script 3.1.clustering_scats_sites.R
 
   tar_target(list_pca,
@@ -224,9 +177,6 @@ list(
                              res_compo_scats_clustering)),
   tar_target(clust_PCs_findk_table,
              clust_find_k_table_PCs(list_pca,
-                                    # pcomp_list = list(CN = c(1:7), 
-                                    #                   PS = c(1:6), 
-                                    #                   both = c(1:6)), # 99% of var
                                     method = "ward.D2",
                                     k_range = c(2:10))),
   tar_target(clust_PCs_findk_means_plot,
@@ -234,18 +184,13 @@ list(
   tar_target(clust_PCs_dendro,
              clust_dendro_scats(list_pca,
                                 res_compo_scats_clustering,
-                                # pcomp_list = list(CN = c(1:7), 
-                                #                   PS = c(1:6), 
-                                #                   both = c(1:6)), # 99% of var
                                 method = "ward.D2",
                                 k = c(3, 4, 4))),
   tar_target(clust_PCs,
              clust_compo_PCs(list_pca,
-                             # pcomp_list = list(CN = c(1:7), 
-                             #                   PS = c(1:6), 
-                             #                   both = c(1:6)), # 99% of var
                              k = c(3, 4, 4),
                              method = "ward.D2")),
+  
   # script 3.2.output_clustering_scats_sites.R
   tar_target(boxplot_scat_compo_PCs_clust,
              boxplot_compo_clust_PCs(clust_PCs,
@@ -292,18 +237,7 @@ list(
                                           res_compo_scats, 
                                           3, 
                                           4)),
-  
-  # tar_target(table_test_clust_PCs_k3_sites,
-  #            MWtest_clust_k3(clust_PCs,
-  #                            res_compo_scats_clustering))
-  # tar_target(table_test_clust_PCs_k4_sites,
-  #            MWtest_clust_k4(clust_PCs,
-  #                            res_compo_scats_clustering))
-  # tar_target(table_test_clust_PCs_k5_sites,
-  #            MWtest_clust_k5(clust_PCs,
-  #                            res_compo_scats_clustering))
-  
-  
+
   ##############################################################################
   ##### script 4.relative-enrichment-thought-experiment.R ######################
   ########### discussion thought experiment: what's the relative ###############

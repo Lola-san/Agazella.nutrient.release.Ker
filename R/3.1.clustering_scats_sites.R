@@ -37,450 +37,450 @@ set_up_scats_compo_clust <- function(compo_results_scats) {
                     Ag, Mo, Pb))
   
 }
-
-################ 1 - USING THE FULL COMPOSITIONAL DATA #########################
-# as in contrast to using Principal components estimated by PCA 
-# to reduce dimensions before conducting the clustering
-
-#'
-#'
-#'
-#'
-# function to perform clustering with different cluster nb and plot 
-# different validating values of the outputs
-clust_find_k_table_full_tib <- function(scat_compo_tib,
-                                        k_range = c(2:10),
-                                        scale = "robust", # other option is "classical"
-                                        method
-) {
-  
-  
-  ########################### CAP NOIR #########################################
-  data.act_CN <- scat_compo_tib |> 
-    dplyr::filter(stringr::str_detect(Code_sample, "CN")) |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  # define distance matrix
-  d_CN <- dist(data.act_CN)
-  
-  # perform clustering
-  tree_CN <- stats::hclust(d_CN, method = method)
-  
-  list_outputs_CN <- list()
-  
-  for (i in k_range) {
-    
-    ## robust estimation (default):
-    res.clust.rob_CN <- robCompositions::clustCoDa(data.act_CN,
-                                                   k = i,
-                                                   scale = scale,
-                                                   method = method)
-    
-    # and save them
-    ki_df <- data.frame(k = res.clust.rob_CN$k,
-                        method = res.clust.rob_CN$method,
-                        size = as.data.frame(res.clust.rob_CN$size)$Freq,
-                        separation = round(res.clust.rob_CN$separation, 3),
-                        average.distance = round(res.clust.rob_CN$average.distance, 3),
-                        median.distance = round(res.clust.rob_CN$median.distance, 3),
-                        avg.silwidth = round(res.clust.rob_CN$silwidths, 3),
-                        average.toother = round(res.clust.rob_CN$average.toother, 3),
-                        min.clust.size = min(as.data.frame(res.clust.rob_CN$size)$Freq))
-    
-    list_outputs_CN <- append(list_outputs_CN, list(ki_df))
-  } 
-  
-  df0_CN <- data.frame(k = NA, 
-                       method = NA,
-                       size = NA,
-                       separation = NA,
-                       average.distance = NA, 
-                       median.distance = NA,
-                       avg.silwidth = NA, 
-                       average.toother = NA, 
-                       min.clust.size = NA)
-  
-  for (i in 1:length(k_range)) {
-    df0_CN <- rbind(df0_CN, list_outputs_CN[[i]])
-  }
-  
-  # delete first line of NAs
-  df.to.plot_CN <- df0_CN[-1,]
-  
-  openxlsx::write.xlsx(df.to.plot_CN, 
-                       file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_CN.xlsx")
-  
-  
-  ########################### POINTE SUZANNE ###################################
-  data.act_PS <- scat_compo_tib |> 
-    dplyr::filter(stringr::str_detect(Code_sample, "PS")) |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  list_outputs_PS <- list()
-  
-  for (i in k_range) {
-    ## robust estimation (default):
-    res.clust.rob_PS <- robCompositions::clustCoDa(data.act_PS,
-                                                   k = i, 
-                                                   scale = scale, 
-                                                   method = method)
-    
-    # and save them
-    ki_df <- data.frame(k = res.clust.rob_PS$k, 
-                        method = res.clust.rob_PS$method, 
-                        size = as.data.frame(res.clust.rob_PS$size)$Freq,
-                        separation = round(res.clust.rob_PS$separation, 3),
-                        average.distance = round(res.clust.rob_PS$average.distance, 3), 
-                        median.distance = round(res.clust.rob_PS$median.distance, 3),
-                        avg.silwidth = round(res.clust.rob_PS$silwidths, 3), 
-                        average.toother = round(res.clust.rob_PS$average.toother, 3), 
-                        min.clust.size = min(as.data.frame(res.clust.rob_PS$size)$Freq))
-    
-    list_outputs_PS <- append(list_outputs_PS, list(ki_df))
-  } 
-  
-  df0_PS <- data.frame(k = NA, 
-                       method = NA,
-                       size = NA,
-                       separation = NA,
-                       average.distance = NA, 
-                       median.distance = NA,
-                       avg.silwidth = NA, 
-                       average.toother = NA, 
-                       min.clust.size = NA)
-  
-  for (i in 1:length(k_range)) {
-    df0_PS <- rbind(df0_PS, list_outputs_PS[[i]])
-  }
-  
-  # delete first line of NAs
-  df.to.plot_PS <- df0_PS[-1,]
-  
-  openxlsx::write.xlsx(df.to.plot_PS, 
-                       file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_PS.xlsx")
-  
-  
-  
-  ######################### both sites together ################################
-  data.act <- scat_compo_tib |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  list_outputs <- list()
-  
-  for (i in k_range) {
-    ## robust estimation (default):
-    res.clust.rob <- robCompositions::clustCoDa(data.act,
-                                                k = i, 
-                                                scale = scale, 
-                                                method = method)
-    
-    # and save them
-    ki_df <- data.frame(k = res.clust.rob$k, 
-                        method = res.clust.rob$method, 
-                        size = as.data.frame(res.clust.rob$size)$Freq,
-                        separation = round(res.clust.rob$separation, 3),
-                        average.distance = round(res.clust.rob$average.distance, 3), 
-                        median.distance = round(res.clust.rob$median.distance, 3),
-                        avg.silwidth = round(res.clust.rob$silwidths, 3), 
-                        average.toother = round(res.clust.rob$average.toother, 3), 
-                        min.clust.size = min(as.data.frame(res.clust.rob$size)$Freq))
-    
-    list_outputs <- append(list_outputs, list(ki_df))
-    
-  }
-  
-  df0 <- data.frame(k = NA, 
-                    method = NA,
-                    size = NA,
-                    separation = NA,
-                    average.distance = NA, 
-                    median.distance = NA,
-                    avg.silwidth = NA, 
-                    average.toother = NA, 
-                    min.clust.size = NA)
-  
-  for (i in 1:length(k_range)) {
-    df0 <- rbind(df0, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df.to.plot <- df0[-1,]
-  
-  openxlsx::write.xlsx(df.to.plot, 
-                       file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_all_scats.xlsx")
-  
-  list(CN = df.to.plot_CN, 
-       PS = df.to.plot_PS, 
-       both = df.to.plot)
-  
-  
-}
-
-
-#'
-#'
-#'
-#'
-# function to show means of validating values of the outputs
-# for different numbers of clusters
-means_clust_find_k_val_full_tib <- function(find_k_output_full_tib
-) {
-  
-  # set color palette 
-  
-  diff <- length(unique(find_k_output_full_tib$CN$k)) - 7
-  
-  possible_col <- c("#CD4F38FF", "#3D4F7DFF", 
-                    "#657060FF", "#EAD890FF") 
-  
-  pal <- c(ghibli::ghibli_palettes$YesterdayMedium, 
-           possible_col[1:diff])
-  
-  ############################### CAP NOIR ###################################
-  find_k_output_CN <- find_k_output_full_tib$CN
-  
-  find_k_output_CN |>
-    dplyr::mutate(k = as.factor(k)) |>
-    tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
-                        names_to = "validity.variable", 
-                        values_to = "value") |>
-    dplyr::group_by(k, validity.variable) |>
-    dplyr::summarize(mean = mean(value)) |>
-    ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
-    ggplot2::geom_point() +
-    ggplot2::facet_wrap(~validity.variable, scale = "free") +
-    ggplot2::scale_color_manual(values = pal) +
-    ggplot2::ggtitle("Cap Noir") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.text.x = ggplot2::element_text(size = 15),
-                   axis.text.y = ggplot2::element_text(size = 15),
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   strip.text.x = ggplot2::element_text(size = 15),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   legend.position = "none")
-  # save plot 
-  ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_CN.jpg",
-                  scale = 1,
-                  height = 6, width = 8)
-  
-  ########################### POINTE SUZANNE #################################
-  
-  find_k_output_PS <- find_k_output_full_tib$PS
-  
-  find_k_output_PS |>
-    dplyr::mutate(k = as.factor(k)) |>
-    tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
-                        names_to = "validity.variable", 
-                        values_to = "value") |>
-    dplyr::group_by(k, validity.variable) |>
-    dplyr::summarize(mean = mean(value)) |>
-    ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
-    ggplot2::geom_point() +
-    ggplot2::facet_wrap(~validity.variable, scale = "free") +
-    ggplot2::scale_color_manual(values = pal) +
-    ggplot2::ggtitle("Pointe Suzanne") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.text.x = ggplot2::element_text(size = 15),
-                   axis.text.y = ggplot2::element_text(size = 15),
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   strip.text.x = ggplot2::element_text(size = 15),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   legend.position = "none")
-  # save plot 
-  ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_PS.jpg",
-                  scale = 1,
-                  height = 6, width = 8)
-  
-  ######################## both sites together #################################
-  # set color palette 
-  
-  diff <- length(unique(find_k_output_full_tib$both$k)) - 7
-  
-  possible_col <- c("#CD4F38FF", "#3D4F7DFF", 
-                    "#657060FF", "#EAD890FF") 
-  
-  pal <- c(ghibli::ghibli_palettes$YesterdayMedium, 
-           possible_col[1:diff])
-  
-  find_k_output_full_tib$both |>
-    dplyr::mutate(k = as.factor(k)) |>
-    tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
-                        names_to = "validity.variable", 
-                        values_to = "value") |>
-    dplyr::group_by(k, validity.variable) |>
-    dplyr::summarize(mean = mean(value)) |>
-    ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
-    ggplot2::geom_point() +
-    ggplot2::facet_wrap(~validity.variable, scale = "free") +
-    ggplot2::scale_color_manual(values = pal) +
-    ggplot2::ggtitle("All scats") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.text.x = ggplot2::element_text(size = 15),
-                   axis.text.y = ggplot2::element_text(size = 15),
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   strip.text.x = ggplot2::element_text(size = 15),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   legend.position = "none")
-  # save plot 
-  ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_all_scats.jpg",
-                  scale = 1,
-                  height = 6, width = 8)
-  
-}
-
-#'
-#'
-#'
-#'
-# function to plot dendrogram for fish and scats based on PC results of robust PCA
-clust_compo_dendro_full_tib <- function(clust_full_tib_output,
-                                        scat_compo_tib
-) {
-  
-  #################################### CAP NOIR ##############################
-  scat_compo_tib_CN <- scat_compo_tib |> 
-    dplyr::filter(stringr::str_detect(Code_sample, "CN"))
-  
-  clust_output_CN <- clust_full_tib_output$CN
-  
-  # dendrogram
-  tree.data_CN <- clust_output_CN$dtree
-  
-  # change labels to sample code 
-  tree.data_CN$labels <- scat_compo_tib_CN$Code_sample
-  
-  # JPEG device
-  jpeg("output/clustering with all nutrients/dendrogram_all_nut_CN.jpg", quality = 85)
-  
-  plot(tree.data_CN)
-  
-  # Close device
-  dev.off()
-  
-  ############################## POINTE SUZANNE ##############################
-  scat_compo_tib_PS <- scat_compo_tib |>
-    dplyr::filter(stringr::str_detect(Code_sample, "PS"))
-  
-  clust_output_PS <- clust_full_tib_output$PS
-  
-  # dendrogram
-  tree.data_PS <- clust_output_PS$dtree
-  
-  # change labels to sample code and add colour grouping
-  tree.data_PS$labels <- scat_compo_tib_PS$Code_sample
-  
-  # JPEG device
-  jpeg("output/clustering with all nutrients/dendrogram_all_nut_PS.jpg", quality = 85)
-  
-  plot(tree.data_PS)
-  
-  # Close device
-  dev.off()
-  
-  ############################ both sites together ###########################
-  # dendrogram
-  tree.data <- clust_full_tib_output$both$dtree
-  
-  # change labels to sample code and add colour grouping
-  tree.data$labels <- scat_compo_tib$Code_sample
-  
-  # JPEG device
-  jpeg("output/clustering with all nutrients/dendrogram_all_nut_all_scats.jpg", quality = 85)
-  
-  plot(tree.data)
-  
-  # Close device
-  dev.off()
-  
-  
-  
-}
-
-
-#'
-#'
-#'
-#'
-# function to perform clustering directly on compositional dataset
-# using the full dataset 
-clust_compo_full_tib <- function(scat_compo_tib, 
-                                 k, # should be vector of length 3, 
-                                 # i.e. nb of cluster in Cap Noir, in Pointe 
-                                 # Suzanne and for all scats
-                                 scale = "robust", # other option is "classical"
-                                 method
-) {
-  
-  data.act_CN <- scat_compo_tib |> 
-    dplyr::filter(stringr::str_detect(Code_sample, "CN")) |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  data.act_PS <- scat_compo_tib |> 
-    dplyr::filter(stringr::str_detect(Code_sample, "PS")) |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  data.act_both <- scat_compo_tib |> 
-    dplyr::select(Ca, P, Mg, Na, K, 
-                  Fe, Zn, Sr, Cu, Mn, Se,
-                  Ni, Cd, V, Cr, As, Co, 
-                  Ag, Mo, Pb) |>
-    as.data.frame()
-  
-  ## robust estimation (default):
-  res.clust.rob_CN <- robCompositions::clustCoDa(data.act_CN,
-                                                 k = k[1], 
-                                                 scale = scale, 
-                                                 method = method)
-  res.clust.rob_PS <- robCompositions::clustCoDa(data.act_PS,
-                                                 k = k[2], 
-                                                 scale = scale, 
-                                                 method = method)
-  ## robust estimation (default):
-  res.clust.rob_both <- robCompositions::clustCoDa(data.act_both,
-                                                   k = k[3], 
-                                                   scale = scale, 
-                                                   method = method)
-  
-  list(CN = res.clust.rob_CN, 
-       PS = res.clust.rob_PS, 
-       both = res.clust.rob_both)
-  
-  
-}
-
-
+#' 
+#' ################ 1 - USING THE FULL COMPOSITIONAL DATA #########################
+#' # as in contrast to using Principal components estimated by PCA 
+#' # to reduce dimensions before conducting the clustering
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to perform clustering with different cluster nb and plot 
+#' # different validating values of the outputs
+#' clust_find_k_table_full_tib <- function(scat_compo_tib,
+#'                                         k_range = c(2:10),
+#'                                         scale = "robust", # other option is "classical"
+#'                                         method
+#' ) {
+#'   
+#'   
+#'   ########################### CAP NOIR #########################################
+#'   data.act_CN <- scat_compo_tib |> 
+#'     dplyr::filter(stringr::str_detect(Code_sample, "CN")) |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   # define distance matrix
+#'   d_CN <- dist(data.act_CN)
+#'   
+#'   # perform clustering
+#'   tree_CN <- stats::hclust(d_CN, method = method)
+#'   
+#'   list_outputs_CN <- list()
+#'   
+#'   for (i in k_range) {
+#'     
+#'     ## robust estimation (default):
+#'     res.clust.rob_CN <- robCompositions::clustCoDa(data.act_CN,
+#'                                                    k = i,
+#'                                                    scale = scale,
+#'                                                    method = method)
+#'     
+#'     # and save them
+#'     ki_df <- data.frame(k = res.clust.rob_CN$k,
+#'                         method = res.clust.rob_CN$method,
+#'                         size = as.data.frame(res.clust.rob_CN$size)$Freq,
+#'                         separation = round(res.clust.rob_CN$separation, 3),
+#'                         average.distance = round(res.clust.rob_CN$average.distance, 3),
+#'                         median.distance = round(res.clust.rob_CN$median.distance, 3),
+#'                         avg.silwidth = round(res.clust.rob_CN$silwidths, 3),
+#'                         average.toother = round(res.clust.rob_CN$average.toother, 3),
+#'                         min.clust.size = min(as.data.frame(res.clust.rob_CN$size)$Freq))
+#'     
+#'     list_outputs_CN <- append(list_outputs_CN, list(ki_df))
+#'   } 
+#'   
+#'   df0_CN <- data.frame(k = NA, 
+#'                        method = NA,
+#'                        size = NA,
+#'                        separation = NA,
+#'                        average.distance = NA, 
+#'                        median.distance = NA,
+#'                        avg.silwidth = NA, 
+#'                        average.toother = NA, 
+#'                        min.clust.size = NA)
+#'   
+#'   for (i in 1:length(k_range)) {
+#'     df0_CN <- rbind(df0_CN, list_outputs_CN[[i]])
+#'   }
+#'   
+#'   # delete first line of NAs
+#'   df.to.plot_CN <- df0_CN[-1,]
+#'   
+#'   openxlsx::write.xlsx(df.to.plot_CN, 
+#'                        file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_CN.xlsx")
+#'   
+#'   
+#'   ########################### POINTE SUZANNE ###################################
+#'   data.act_PS <- scat_compo_tib |> 
+#'     dplyr::filter(stringr::str_detect(Code_sample, "PS")) |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   list_outputs_PS <- list()
+#'   
+#'   for (i in k_range) {
+#'     ## robust estimation (default):
+#'     res.clust.rob_PS <- robCompositions::clustCoDa(data.act_PS,
+#'                                                    k = i, 
+#'                                                    scale = scale, 
+#'                                                    method = method)
+#'     
+#'     # and save them
+#'     ki_df <- data.frame(k = res.clust.rob_PS$k, 
+#'                         method = res.clust.rob_PS$method, 
+#'                         size = as.data.frame(res.clust.rob_PS$size)$Freq,
+#'                         separation = round(res.clust.rob_PS$separation, 3),
+#'                         average.distance = round(res.clust.rob_PS$average.distance, 3), 
+#'                         median.distance = round(res.clust.rob_PS$median.distance, 3),
+#'                         avg.silwidth = round(res.clust.rob_PS$silwidths, 3), 
+#'                         average.toother = round(res.clust.rob_PS$average.toother, 3), 
+#'                         min.clust.size = min(as.data.frame(res.clust.rob_PS$size)$Freq))
+#'     
+#'     list_outputs_PS <- append(list_outputs_PS, list(ki_df))
+#'   } 
+#'   
+#'   df0_PS <- data.frame(k = NA, 
+#'                        method = NA,
+#'                        size = NA,
+#'                        separation = NA,
+#'                        average.distance = NA, 
+#'                        median.distance = NA,
+#'                        avg.silwidth = NA, 
+#'                        average.toother = NA, 
+#'                        min.clust.size = NA)
+#'   
+#'   for (i in 1:length(k_range)) {
+#'     df0_PS <- rbind(df0_PS, list_outputs_PS[[i]])
+#'   }
+#'   
+#'   # delete first line of NAs
+#'   df.to.plot_PS <- df0_PS[-1,]
+#'   
+#'   openxlsx::write.xlsx(df.to.plot_PS, 
+#'                        file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_PS.xlsx")
+#'   
+#'   
+#'   
+#'   ######################### both sites together ################################
+#'   data.act <- scat_compo_tib |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   list_outputs <- list()
+#'   
+#'   for (i in k_range) {
+#'     ## robust estimation (default):
+#'     res.clust.rob <- robCompositions::clustCoDa(data.act,
+#'                                                 k = i, 
+#'                                                 scale = scale, 
+#'                                                 method = method)
+#'     
+#'     # and save them
+#'     ki_df <- data.frame(k = res.clust.rob$k, 
+#'                         method = res.clust.rob$method, 
+#'                         size = as.data.frame(res.clust.rob$size)$Freq,
+#'                         separation = round(res.clust.rob$separation, 3),
+#'                         average.distance = round(res.clust.rob$average.distance, 3), 
+#'                         median.distance = round(res.clust.rob$median.distance, 3),
+#'                         avg.silwidth = round(res.clust.rob$silwidths, 3), 
+#'                         average.toother = round(res.clust.rob$average.toother, 3), 
+#'                         min.clust.size = min(as.data.frame(res.clust.rob$size)$Freq))
+#'     
+#'     list_outputs <- append(list_outputs, list(ki_df))
+#'     
+#'   }
+#'   
+#'   df0 <- data.frame(k = NA, 
+#'                     method = NA,
+#'                     size = NA,
+#'                     separation = NA,
+#'                     average.distance = NA, 
+#'                     median.distance = NA,
+#'                     avg.silwidth = NA, 
+#'                     average.toother = NA, 
+#'                     min.clust.size = NA)
+#'   
+#'   for (i in 1:length(k_range)) {
+#'     df0 <- rbind(df0, list_outputs[[i]])
+#'   }
+#'   
+#'   # delete first line of NAs
+#'   df.to.plot <- df0[-1,]
+#'   
+#'   openxlsx::write.xlsx(df.to.plot, 
+#'                        file = "output/clustering with all nutrients/clust_all_nut_findk_validity_measures_all_scats.xlsx")
+#'   
+#'   list(CN = df.to.plot_CN, 
+#'        PS = df.to.plot_PS, 
+#'        both = df.to.plot)
+#'   
+#'   
+#' }
+#' 
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to show means of validating values of the outputs
+#' # for different numbers of clusters
+#' means_clust_find_k_val_full_tib <- function(find_k_output_full_tib
+#' ) {
+#'   
+#'   # set color palette 
+#'   
+#'   diff <- length(unique(find_k_output_full_tib$CN$k)) - 7
+#'   
+#'   possible_col <- c("#CD4F38FF", "#3D4F7DFF", 
+#'                     "#657060FF", "#EAD890FF") 
+#'   
+#'   pal <- c(ghibli::ghibli_palettes$YesterdayMedium, 
+#'            possible_col[1:diff])
+#'   
+#'   ############################### CAP NOIR ###################################
+#'   find_k_output_CN <- find_k_output_full_tib$CN
+#'   
+#'   find_k_output_CN |>
+#'     dplyr::mutate(k = as.factor(k)) |>
+#'     tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
+#'                         names_to = "validity.variable", 
+#'                         values_to = "value") |>
+#'     dplyr::group_by(k, validity.variable) |>
+#'     dplyr::summarize(mean = mean(value)) |>
+#'     ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::facet_wrap(~validity.variable, scale = "free") +
+#'     ggplot2::scale_color_manual(values = pal) +
+#'     ggplot2::ggtitle("Cap Noir") +
+#'     ggplot2::theme_bw() +
+#'     ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    axis.text.x = ggplot2::element_text(size = 15),
+#'                    axis.text.y = ggplot2::element_text(size = 15),
+#'                    axis.title.y = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    strip.text.x = ggplot2::element_text(size = 15),
+#'                    title = ggplot2::element_text(size = 17, 
+#'                                                  face = "bold"),
+#'                    legend.position = "none")
+#'   # save plot 
+#'   ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_CN.jpg",
+#'                   scale = 1,
+#'                   height = 6, width = 8)
+#'   
+#'   ########################### POINTE SUZANNE #################################
+#'   
+#'   find_k_output_PS <- find_k_output_full_tib$PS
+#'   
+#'   find_k_output_PS |>
+#'     dplyr::mutate(k = as.factor(k)) |>
+#'     tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
+#'                         names_to = "validity.variable", 
+#'                         values_to = "value") |>
+#'     dplyr::group_by(k, validity.variable) |>
+#'     dplyr::summarize(mean = mean(value)) |>
+#'     ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::facet_wrap(~validity.variable, scale = "free") +
+#'     ggplot2::scale_color_manual(values = pal) +
+#'     ggplot2::ggtitle("Pointe Suzanne") +
+#'     ggplot2::theme_bw() +
+#'     ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    axis.text.x = ggplot2::element_text(size = 15),
+#'                    axis.text.y = ggplot2::element_text(size = 15),
+#'                    axis.title.y = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    strip.text.x = ggplot2::element_text(size = 15),
+#'                    title = ggplot2::element_text(size = 17, 
+#'                                                  face = "bold"),
+#'                    legend.position = "none")
+#'   # save plot 
+#'   ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_PS.jpg",
+#'                   scale = 1,
+#'                   height = 6, width = 8)
+#'   
+#'   ######################## both sites together #################################
+#'   # set color palette 
+#'   
+#'   diff <- length(unique(find_k_output_full_tib$both$k)) - 7
+#'   
+#'   possible_col <- c("#CD4F38FF", "#3D4F7DFF", 
+#'                     "#657060FF", "#EAD890FF") 
+#'   
+#'   pal <- c(ghibli::ghibli_palettes$YesterdayMedium, 
+#'            possible_col[1:diff])
+#'   
+#'   find_k_output_full_tib$both |>
+#'     dplyr::mutate(k = as.factor(k)) |>
+#'     tidyr::pivot_longer(cols = c("separation":"min.clust.size"), 
+#'                         names_to = "validity.variable", 
+#'                         values_to = "value") |>
+#'     dplyr::group_by(k, validity.variable) |>
+#'     dplyr::summarize(mean = mean(value)) |>
+#'     ggplot2::ggplot(ggplot2::aes(x = k, y = mean, color = k)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::facet_wrap(~validity.variable, scale = "free") +
+#'     ggplot2::scale_color_manual(values = pal) +
+#'     ggplot2::ggtitle("All scats") +
+#'     ggplot2::theme_bw() +
+#'     ggplot2::theme(axis.title.x = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    axis.text.x = ggplot2::element_text(size = 15),
+#'                    axis.text.y = ggplot2::element_text(size = 15),
+#'                    axis.title.y = ggplot2::element_text(size = 16, 
+#'                                                         face = "bold"), 
+#'                    strip.text.x = ggplot2::element_text(size = 15),
+#'                    title = ggplot2::element_text(size = 17, 
+#'                                                  face = "bold"),
+#'                    legend.position = "none")
+#'   # save plot 
+#'   ggplot2::ggsave("output/clustering with all nutrients/findk_validity_measures_means_all_nut_all_scats.jpg",
+#'                   scale = 1,
+#'                   height = 6, width = 8)
+#'   
+#' }
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to plot dendrogram for fish and scats based on PC results of robust PCA
+#' clust_compo_dendro_full_tib <- function(clust_full_tib_output,
+#'                                         scat_compo_tib
+#' ) {
+#'   
+#'   #################################### CAP NOIR ##############################
+#'   scat_compo_tib_CN <- scat_compo_tib |> 
+#'     dplyr::filter(stringr::str_detect(Code_sample, "CN"))
+#'   
+#'   clust_output_CN <- clust_full_tib_output$CN
+#'   
+#'   # dendrogram
+#'   tree.data_CN <- clust_output_CN$dtree
+#'   
+#'   # change labels to sample code 
+#'   tree.data_CN$labels <- scat_compo_tib_CN$Code_sample
+#'   
+#'   # JPEG device
+#'   jpeg("output/clustering with all nutrients/dendrogram_all_nut_CN.jpg", quality = 85)
+#'   
+#'   plot(tree.data_CN)
+#'   
+#'   # Close device
+#'   dev.off()
+#'   
+#'   ############################## POINTE SUZANNE ##############################
+#'   scat_compo_tib_PS <- scat_compo_tib |>
+#'     dplyr::filter(stringr::str_detect(Code_sample, "PS"))
+#'   
+#'   clust_output_PS <- clust_full_tib_output$PS
+#'   
+#'   # dendrogram
+#'   tree.data_PS <- clust_output_PS$dtree
+#'   
+#'   # change labels to sample code and add colour grouping
+#'   tree.data_PS$labels <- scat_compo_tib_PS$Code_sample
+#'   
+#'   # JPEG device
+#'   jpeg("output/clustering with all nutrients/dendrogram_all_nut_PS.jpg", quality = 85)
+#'   
+#'   plot(tree.data_PS)
+#'   
+#'   # Close device
+#'   dev.off()
+#'   
+#'   ############################ both sites together ###########################
+#'   # dendrogram
+#'   tree.data <- clust_full_tib_output$both$dtree
+#'   
+#'   # change labels to sample code and add colour grouping
+#'   tree.data$labels <- scat_compo_tib$Code_sample
+#'   
+#'   # JPEG device
+#'   jpeg("output/clustering with all nutrients/dendrogram_all_nut_all_scats.jpg", quality = 85)
+#'   
+#'   plot(tree.data)
+#'   
+#'   # Close device
+#'   dev.off()
+#'   
+#'   
+#'   
+#' }
+#' 
+#' 
+#' #'
+#' #'
+#' #'
+#' #'
+#' # function to perform clustering directly on compositional dataset
+#' # using the full dataset 
+#' clust_compo_full_tib <- function(scat_compo_tib, 
+#'                                  k, # should be vector of length 3, 
+#'                                  # i.e. nb of cluster in Cap Noir, in Pointe 
+#'                                  # Suzanne and for all scats
+#'                                  scale = "robust", # other option is "classical"
+#'                                  method
+#' ) {
+#'   
+#'   data.act_CN <- scat_compo_tib |> 
+#'     dplyr::filter(stringr::str_detect(Code_sample, "CN")) |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   data.act_PS <- scat_compo_tib |> 
+#'     dplyr::filter(stringr::str_detect(Code_sample, "PS")) |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   data.act_both <- scat_compo_tib |> 
+#'     dplyr::select(Ca, P, Mg, Na, K, 
+#'                   Fe, Zn, Sr, Cu, Mn, Se,
+#'                   Ni, Cd, V, Cr, As, Co, 
+#'                   Ag, Mo, Pb) |>
+#'     as.data.frame()
+#'   
+#'   ## robust estimation (default):
+#'   res.clust.rob_CN <- robCompositions::clustCoDa(data.act_CN,
+#'                                                  k = k[1], 
+#'                                                  scale = scale, 
+#'                                                  method = method)
+#'   res.clust.rob_PS <- robCompositions::clustCoDa(data.act_PS,
+#'                                                  k = k[2], 
+#'                                                  scale = scale, 
+#'                                                  method = method)
+#'   ## robust estimation (default):
+#'   res.clust.rob_both <- robCompositions::clustCoDa(data.act_both,
+#'                                                    k = k[3], 
+#'                                                    scale = scale, 
+#'                                                    method = method)
+#'   
+#'   list(CN = res.clust.rob_CN, 
+#'        PS = res.clust.rob_PS, 
+#'        both = res.clust.rob_both)
+#'   
+#'   
+#' }
+#' 
+#' 
 
 ################ 2 - STARTING WITH A PCA TO REDUCE DIMENSIONS ##################
 ########################## BEFORE CLUSTERING ###################################

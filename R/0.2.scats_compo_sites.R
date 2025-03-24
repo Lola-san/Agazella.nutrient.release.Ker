@@ -299,7 +299,7 @@ MWtest_scats_compo_sites <- function(scat_compo_tib) {
                                                  TRUE ~ "no"))
   
   openxlsx::write.xlsx(df_test, 
-                       file = "output/Mann_Whitney_test_scats_sites.xlsx")
+                       file = "output/figures-tables-article/Mann_Whitney_test_scats_sites.xlsx")
   
 }
 
@@ -794,7 +794,7 @@ MWtest_scats_compo_relative_sites <- function(scat_compo_tib) {
                                                  TRUE ~ "no"))
   
   openxlsx::write.xlsx(df_test, 
-                       file = "output/exploration and intermediary results/Mann_Whitney_test_scats_compo_relative_sites.xlsx")
+                       file = "output/figures-tables-article/Mann_Whitney_test_scats_compo_relative_sites.xlsx")
   
 }
 

@@ -102,11 +102,11 @@ MWtest_clust_k3|function|e21e72c1767299c4|||||||||||||||
 MWtest_clust_k33_full_tib|function|38735bf83f0e7558|||||||||||||||
 MWtest_clust_k34|function|0bf05eb5f114d292|||||||||||||||
 MWtest_clust_k34_full_tib|function|2103863e035ef1ee|||||||||||||||
-MWtest_clust_k4|function|3e4d7bc09b772e6b|||||||||||||||
+MWtest_clust_k4|function|e735636174c2f364|||||||||||||||
 MWtest_clust_k43_full_tib|function|7234ba1a25551fb2|||||||||||||||
 MWtest_clust_k5|function|a892e16e66e1ff68|||||||||||||||
-MWtest_scats_compo_relative_sites|function|abcc0f0d7cceedac|||||||||||||||
-MWtest_scats_compo_sites|function|24da4605e642e84a|||||||||||||||
+MWtest_scats_compo_relative_sites|function|cb92f588ac9b31ad|||||||||||||||
+MWtest_scats_compo_sites|function|a2becf997cc70371|||||||||||||||
 nb_animals_per_site_simulated|function|4d06b3359bc41218|||||||||||||||
 nut_per_site_tot_period|function|c1e897ce3301ce6b|||||||||||||||
 oceanographic_clean_data_Bowieetal2015|stem|241ba27f98623eaa|41a25cd7a18d4407|fa8db3d5a0916735|-1295752173||t20157.6653569718s|a1eb2c1cc7ef6b38|294|rds|local|vector|||0.25||
@@ -126,8 +126,8 @@ pop_data_with_indi_data_CN|stem|3afe7c978b74c6c5|7243dcddd9bb975a|4a4a2df237f6d5
 pop_data_with_indi_data_PS|stem|6ce850513616bfe5|58deb29c7b82cbf9|4a4a2df237f6d5cd|-552152561||t19779.3486462117s|4c02c9e5279a3eaf|267564658|rds|local|vector|||0||
 pop_initial_count_data|stem|a43e20a8abc623f5|bc39dae79b8c1e5f|3a71b769cb310840|382841495||t19779.3364116564s|3d5c497082bdda33|338|rds|local|vector|||0.17||
 relative_enrichement_around_Ker_tib|stem|c69aae8cf1dc5710|e212942b8606029e|3cf7398c7b68af99|432829811||t19822.5294977621s|407e542fcca3aef3|159727|rds|local|vector|||0.69|impossible de créer le fichier outputtable_scats_Fe_moles.xlsx, à cause de Permission denied|
-relative_enrichment|function|cd0099de67fd49fa|||||||||||||||
-relative_enrichment_at_sea_figures|stem|e3cb5730fb7e1645|ba095b079a9a9ac6|c8caf52c4f64ad25|-2001191065||t20157.6727552861s|61b44049c1454343|160265|rds|local|vector|||0.41||
+relative_enrichment|function|8648ddc4b696bbdc|||||||||||||||
+relative_enrichment_at_sea_figures|stem|708fb250cc753d0f|ba095b079a9a9ac6|a21db70ffede2f6f|-2001191065||t20171.7470789205s|2d4d8762744c6eb8|162093|rds|local|vector|||0.1||
 replace_under_loq_values|function|682c70a022fed337|||||||||||||||
 res_compo_scats|stem|22957a43fd654c61|d38d1b7229079e16|d6fdc49911b51743|1476040541||t19804.5293124287s|712e72139cdb52dc|9407|rds|local|vector|||0.09||
 res_compo_scats_clustering|stem|926672f2ba1563a5|33ceb7a57328c580|d547fbf3fa567ce7|1162036734||t19865.5021529834s|1b9e274cc45e85f0|9492|rds|local|vector|||0.13||
@@ -164,8 +164,8 @@ table_test_clust_PCs_k5_sites|stem|41e6951cbc03817b|650e4ff479bd0af2|b1bf98d8eb3
 table_test_clust_PCs_sites|stem|26da95d12ca6db98|6e61bcf1a9995ce8|11782a4951b29dd7|-178063067||t19808.5307660085s|bf9c19f7df7e9c0c|2189|rds|local|vector|||0.6|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
 table_test_dm_release_per_site_tot_period|stem|6fb9138ccb0fede9|4d665416f01778e9|e581014a335eb9e0|-377898853||t20158.625304927s|c660632b73ee91cf|159253|rds|local|vector|||0.13||
 table_test_nut_release_per_site_tot_period|stem|6ef4a4ed57a827b2|b21cdb483fe8fd3c|8d134b97ce031f93|-1091176206||t20158.6430473493s|6861b5eec23fc30f|159584|rds|local|vector|||1.4||
-table_test_scat_compo_rel_sites|stem|a92f30c42741f3f7|56dee1fddea2adf6|27f2f5cfa58b9c08|-381529584||t20158.6251459357s|6e0d47557114de1b|159833|rds|local|vector|||0.36||
-table_test_scat_compo_sites|stem|48037f13a9c6e40c|e9df9611edf5e37d|ecf07581eccbf802|-745729489||t19865.5022348803s|0ec60e834876f460|159863|rds|local|vector|||0.28|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
+table_test_scat_compo_rel_sites|stem|de2aa189dc7b85fb|56dee1fddea2adf6|8d114096a7febad2|-381529584||t20171.747076813s|6f2e4edb0c9acc0a|161680|rds|local|vector|||0.32||
+table_test_scat_compo_sites|stem|d6c47a9e93b9e84d|e9df9611edf5e37d|13f21f7ba0e5610f|-745729489||t20171.7470722386s|cb139c6e86c3bce1|161710|rds|local|vector|||1.67|impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos. impossible de calculer la pvalue exacte avec des exaequos|
 tables_scat_samples_all_nut_clust_attribution|stem|2aee677d93ec2747|fe782fb0b7060868|d79a253c9617ce02|-677289792||t19865.5022937006s|2d377f16121d3334|167753|rds|local|vector|||0.19||
 tables_scat_samples_clust_attribution|stem|388829814e769fcc|7c5696fc0f42b552|0077060df6270dfb|1062083919||t19793.5691608151s|27750a258fc72963|165100|rds|local|vector|||0.21|impossible de créer le fichier outputclustering with all nutrientsclust_attribution_PS.xlsx, à cause de Permission denied|
 tables_scat_samples_PCs_clust_attribution|stem|101687bd14f128f9|c5dbd53da3436d97|e91a136c3f5fc87a|1892437888||t19865.5023761306s|f0fe7462e331abc1|167749|rds|local|vector|||0.22||

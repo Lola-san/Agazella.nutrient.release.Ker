@@ -8,7 +8,7 @@
 ################################################################################
 
 ################################################################################
-################ 1 - STARTING WITH A PCA TO REDUCE DIMENSIONS ##################
+################ STARTING WITH A PCA TO REDUCE DIMENSIONS ##################
 ################################################################################
 
 
@@ -725,8 +725,6 @@ table_compo_clust_PCs_percent_per_site <- function(list_res_clust_sites,
 
 
 
-
-
 #'
 #'
 #'
@@ -734,8 +732,8 @@ table_compo_clust_PCs_percent_per_site <- function(list_res_clust_sites,
 #'
 # function to compute Mann-Whitney U Test to assess difference between 
 # concentration of fish in different clusters 
-MWtest_clust_k4 <- function(list_res_clust_sites,
-                            scat_compo_tib) {
+MWtest_clust_k34 <- function(list_res_clust_sites,
+                             scat_compo_tib) {
   
   # assign each sample to its cluster
   clust_vec_CN <- list_res_clust_sites$CN$cluster
@@ -788,7 +786,6 @@ MWtest_clust_k4 <- function(list_res_clust_sites,
     clust1_CN <- na.omit(table_CN$`1`)
     clust2_CN <- na.omit(table_CN$`2`)
     clust3_CN <- na.omit(table_CN$`3`)
-    clust4_CN <- na.omit(table_CN$`4`)
     
     table_PS <- table_PS |>
       tidyr::pivot_wider(names_from = cluster, 
@@ -800,24 +797,18 @@ MWtest_clust_k4 <- function(list_res_clust_sites,
     clust4_PS <- na.omit(table_PS$`4`)
     
     nut_test <- rbind(data.frame(Site = "Cap Noir",
-                                 Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1",
-                                                    "2", "2", 
+                                 Nutrient = rep(nut, 3), 
+                                 Cluster_comp_1 = c("1", "1", 
+                                                    "2"), 
+                                 Cluster_comp_2 = c("2", "3",
                                                     "3"), 
-                                 Cluster_comp_2 = c("2", "3", "4",
-                                                    "3", "4", 
-                                                    "4"), 
                                  alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
                                               wilcox.test(clust1_CN, clust3_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust4_CN)[[3]],
                                               
-                                              wilcox.test(clust2_CN, clust3_CN)[[3]],
-                                              wilcox.test(clust2_CN, clust4_CN)[[3]],
-                                              
-                                              wilcox.test(clust3_CN, clust4_CN)[[3]])), 
+                                              wilcox.test(clust2_CN, clust3_CN)[[3]])), 
                       data.frame(Site = "Pointe Suzanne",
                                  Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1",
+                                 Cluster_comp_1 = c("1", "1", "1", 
                                                     "2", "2", 
                                                     "3"), 
                                  Cluster_comp_2 = c("2", "3", "4",
@@ -832,14 +823,12 @@ MWtest_clust_k4 <- function(list_res_clust_sites,
                                               
                                               wilcox.test(clust3_PS, clust4_PS)[[3]])), 
                       data.frame(Site = "both",
-                                 Nutrient = rep(nut, 16), 
-                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN",
-                                                    "2_CN", "2_CN", "2_CN", "2_CN", 
-                                                    "3_CN", "3_CN", "3_CN", "3_CN", 
-                                                    "4_CN", "4_CN", "4_CN", "4_CN"), 
-                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS",
+                                 Nutrient = rep(nut, 12), 
+                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN", 
+                                                    "2_CN", "2_CN", "2_CN", "2_CN",  
+                                                    "3_CN", "3_CN", "3_CN", "3_CN"), 
+                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS", 
+                                                    "1_PS", "2_PS", "3_PS", "4_PS", 
                                                     "1_PS", "2_PS", "3_PS", "4_PS"), 
                                  alpha_MW = c(wilcox.test(clust1_CN, clust1_PS)[[3]],
                                               wilcox.test(clust1_CN, clust2_PS)[[3]],
@@ -854,215 +843,7 @@ MWtest_clust_k4 <- function(list_res_clust_sites,
                                               wilcox.test(clust3_CN, clust1_PS)[[3]],
                                               wilcox.test(clust3_CN, clust2_PS)[[3]],
                                               wilcox.test(clust3_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust4_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust4_PS)[[3]]))
-                      )
-                      
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Site = NA, 
-                        Nutrient = NA, 
-                        Cluster_comp_1 = NA,
-                        Cluster_comp_2 = NA,
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,] |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = alpha_MW)
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/clustering with PCs/Mann_Whitney_test_clust_PCs_compo_sites.xlsx")
-  
-  df_test
-}
-
-
-
-#'
-#'
-#'
-#'
-# output matching species/samples with attributed cluster
-clust_PCs_samples <- function(clust_PCs_output,
-                              scat_compo_tib
-) {
-  
-  #Cap Noir
-  clust_vec_CN <- clust_PCs_output$CN$cluster
-  
-  clust_tib_CN <- scat_compo_tib |> 
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Cap Noir", 
-                  # outliers
-                  !(Code_sample %in% c("CN12"))) |>
-    dplyr::ungroup() |>
-    dplyr::mutate(cluster = as.factor(clust_vec_CN)) 
-  
-  # save 
-  openxlsx::write.xlsx(clust_tib_CN, 
-                       file = "output/clustering with PCs/clust_attribution_CN.xlsx")
-  
-  # Pointe Suzanne
-  clust_vec_PS <- clust_PCs_output$PS$cluster
-  
-  clust_tib_PS <- scat_compo_tib |> 
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Pointe Suz", 
-                  # outliers
-                  !(Code_sample %in% c("CN12"))) |>
-    dplyr::ungroup() |>
-    dplyr::mutate(cluster = as.factor(clust_vec_PS)) 
-  # save 
-  openxlsx::write.xlsx(clust_tib_PS, 
-                       file = "output/clustering with PCs/clust_attribution_PS.xlsx")
-  }
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# concentration of fish in different clusters 
-MWtest_clust_k4 <- function(list_res_clust_sites,
-                            scat_compo_tib) {
-  
-  # assign each sample to its cluster
-  clust_vec_CN <- list_res_clust_sites$CN$cluster
-  clust_vec_PS <- list_res_clust_sites$PS$cluster
-  
-  scat_compo_tib_CN <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  scat_compo_tib_PS <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Pointe Suzanne") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  
-  nut_vec <- unique(scat_compo_tib_CN$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table_CN <- scat_compo_tib_CN |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_PS <- scat_compo_tib_PS |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_CN$cluster <- factor(table_CN$cluster)
-    table_PS$cluster <- factor(table_PS$cluster)
-    
-    table_CN <- table_CN |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_CN <- na.omit(table_CN$`1`)
-    clust2_CN <- na.omit(table_CN$`2`)
-    clust3_CN <- na.omit(table_CN$`3`)
-    clust4_CN <- na.omit(table_CN$`4`)
-    
-    table_PS <- table_PS |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_PS <- na.omit(table_PS$`1`)
-    clust2_PS <- na.omit(table_PS$`2`)
-    clust3_PS <- na.omit(table_PS$`3`)
-    clust4_PS <- na.omit(table_PS$`4`)
-    
-    nut_test <- rbind(data.frame(Site = "Cap Noir",
-                                 Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1",
-                                                    "2", "2", 
-                                                    "3"), 
-                                 Cluster_comp_2 = c("2", "3", "4",
-                                                    "3", "4", 
-                                                    "4"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust3_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust4_CN)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust3_CN)[[3]],
-                                              wilcox.test(clust2_CN, clust4_CN)[[3]],
-                                              
-                                              wilcox.test(clust3_CN, clust4_CN)[[3]])), 
-                      data.frame(Site = "Pointe Suzanne",
-                                 Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1",
-                                                    "2", "2", 
-                                                    "3"), 
-                                 Cluster_comp_2 = c("2", "3", "4",
-                                                    "3", "4", 
-                                                    "4"), 
-                                 alpha_MW = c(wilcox.test(clust1_PS, clust2_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust2_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_PS, clust4_PS)[[3]])), 
-                      data.frame(Site = "both",
-                                 Nutrient = rep(nut, 16), 
-                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN",
-                                                    "2_CN", "2_CN", "2_CN", "2_CN", 
-                                                    "3_CN", "3_CN", "3_CN", "3_CN", 
-                                                    "4_CN", "4_CN", "4_CN", "4_CN"), 
-                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust4_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust4_CN, clust4_PS)[[3]]))
+                                              wilcox.test(clust3_CN, clust4_PS)[[3]]))
     )
     
     list_outputs <- append(list_outputs, list(nut_test))
@@ -1085,7 +866,7 @@ MWtest_clust_k4 <- function(list_res_clust_sites,
                        values_from = alpha_MW)
   
   openxlsx::write.xlsx(df_test, 
-                       file = "output/clustering with PCs/Mann_Whitney_test_clust_PCs_compo_sites.xlsx")
+                       file = "output/clustering with PCs/Mann_Whitney_test_clust_PCs_k34_compo_sites.xlsx")
   
   df_test
 }
@@ -1131,8 +912,7 @@ clust_PCs_samples <- function(clust_PCs_output,
   # save 
   openxlsx::write.xlsx(clust_tib_PS, 
                        file = "output/clustering with PCs/clust_attribution_PS.xlsx")
-}
-
+  }
 
 #'
 #'
@@ -1490,6 +1270,171 @@ biplot_after_clust <- function(list_res_pca,
 }
 
 
+################################################################################
+# functions to compute MWW comparison tests between clusters ###################
+# for other nb of clusters than the one chosen in the article ##################
+
+
+#'
+#'
+#'
+#'
+#'
+# function to compute Mann-Whitney U Test to assess difference between 
+# concentration of fish in different clusters 
+MWtest_clust_k4 <- function(list_res_clust_sites,
+                            scat_compo_tib) {
+  
+  # assign each sample to its cluster
+  clust_vec_CN <- list_res_clust_sites$CN$cluster
+  clust_vec_PS <- list_res_clust_sites$PS$cluster
+  
+  scat_compo_tib_CN <- scat_compo_tib |>
+    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
+                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
+    dplyr::filter(site == "Cap Noir") |>
+    dplyr::mutate(cluster = clust_vec_CN) |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, V, Cr, As, Co, 
+                                 Ag, Mo, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "conc_mg_kg_dw") 
+  
+  scat_compo_tib_PS <- scat_compo_tib |>
+    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
+                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
+    dplyr::filter(site == "Pointe Suzanne") |>
+    dplyr::mutate(cluster = clust_vec_PS) |>
+    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
+                                 Fe, Zn, Sr, Cu, Mn, Se,
+                                 Ni, Cd, V, Cr, As, Co, 
+                                 Ag, Mo, Pb), 
+                        names_to = "Nutrient", 
+                        values_to = "conc_mg_kg_dw") 
+  
+  
+  nut_vec <- unique(scat_compo_tib_CN$Nutrient)
+  
+  list_outputs <- list()
+  
+  for (nut in nut_vec) {
+    
+    table_CN <- scat_compo_tib_CN |>
+      dplyr::filter(Nutrient == nut)
+    
+    table_PS <- scat_compo_tib_PS |>
+      dplyr::filter(Nutrient == nut)
+    
+    table_CN$cluster <- factor(table_CN$cluster)
+    table_PS$cluster <- factor(table_PS$cluster)
+    
+    table_CN <- table_CN |>
+      tidyr::pivot_wider(names_from = cluster, 
+                         values_from = conc_mg_kg_dw) 
+    
+    clust1_CN <- na.omit(table_CN$`1`)
+    clust2_CN <- na.omit(table_CN$`2`)
+    clust3_CN <- na.omit(table_CN$`3`)
+    clust4_CN <- na.omit(table_CN$`4`)
+    
+    table_PS <- table_PS |>
+      tidyr::pivot_wider(names_from = cluster, 
+                         values_from = conc_mg_kg_dw) 
+    
+    clust1_PS <- na.omit(table_PS$`1`)
+    clust2_PS <- na.omit(table_PS$`2`)
+    clust3_PS <- na.omit(table_PS$`3`)
+    clust4_PS <- na.omit(table_PS$`4`)
+    
+    nut_test <- rbind(data.frame(Site = "Cap Noir",
+                                 Nutrient = rep(nut, 6), 
+                                 Cluster_comp_1 = c("1", "1", "1",
+                                                    "2", "2", 
+                                                    "3"), 
+                                 Cluster_comp_2 = c("2", "3", "4",
+                                                    "3", "4", 
+                                                    "4"), 
+                                 alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
+                                              wilcox.test(clust1_CN, clust3_CN)[[3]],
+                                              wilcox.test(clust1_CN, clust4_CN)[[3]],
+                                              
+                                              wilcox.test(clust2_CN, clust3_CN)[[3]],
+                                              wilcox.test(clust2_CN, clust4_CN)[[3]],
+                                              
+                                              wilcox.test(clust3_CN, clust4_CN)[[3]])), 
+                      data.frame(Site = "Pointe Suzanne",
+                                 Nutrient = rep(nut, 6), 
+                                 Cluster_comp_1 = c("1", "1", "1",
+                                                    "2", "2", 
+                                                    "3"), 
+                                 Cluster_comp_2 = c("2", "3", "4",
+                                                    "3", "4", 
+                                                    "4"), 
+                                 alpha_MW = c(wilcox.test(clust1_PS, clust2_PS)[[3]],
+                                              wilcox.test(clust1_PS, clust3_PS)[[3]],
+                                              wilcox.test(clust1_PS, clust4_PS)[[3]],
+                                              
+                                              wilcox.test(clust2_PS, clust3_PS)[[3]],
+                                              wilcox.test(clust2_PS, clust4_PS)[[3]],
+                                              
+                                              wilcox.test(clust3_PS, clust4_PS)[[3]])), 
+                      data.frame(Site = "both",
+                                 Nutrient = rep(nut, 16), 
+                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN",
+                                                    "2_CN", "2_CN", "2_CN", "2_CN", 
+                                                    "3_CN", "3_CN", "3_CN", "3_CN", 
+                                                    "4_CN", "4_CN", "4_CN", "4_CN"), 
+                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS",
+                                                    "1_PS", "2_PS", "3_PS", "4_PS",
+                                                    "1_PS", "2_PS", "3_PS", "4_PS",
+                                                    "1_PS", "2_PS", "3_PS", "4_PS"), 
+                                 alpha_MW = c(wilcox.test(clust1_CN, clust1_PS)[[3]],
+                                              wilcox.test(clust1_CN, clust2_PS)[[3]],
+                                              wilcox.test(clust1_CN, clust3_PS)[[3]],
+                                              wilcox.test(clust1_CN, clust4_PS)[[3]],
+                                              
+                                              wilcox.test(clust2_CN, clust1_PS)[[3]],
+                                              wilcox.test(clust2_CN, clust2_PS)[[3]],
+                                              wilcox.test(clust2_CN, clust3_PS)[[3]],
+                                              wilcox.test(clust2_CN, clust4_PS)[[3]],
+                                              
+                                              wilcox.test(clust3_CN, clust1_PS)[[3]],
+                                              wilcox.test(clust3_CN, clust2_PS)[[3]],
+                                              wilcox.test(clust3_CN, clust3_PS)[[3]],
+                                              wilcox.test(clust3_CN, clust4_PS)[[3]],
+                                              
+                                              wilcox.test(clust4_CN, clust1_PS)[[3]],
+                                              wilcox.test(clust4_CN, clust2_PS)[[3]],
+                                              wilcox.test(clust4_CN, clust3_PS)[[3]],
+                                              wilcox.test(clust4_CN, clust4_PS)[[3]]))
+    )
+    
+    list_outputs <- append(list_outputs, list(nut_test))
+  }
+  
+  
+  df_test <- data.frame(Site = NA, 
+                        Nutrient = NA, 
+                        Cluster_comp_1 = NA,
+                        Cluster_comp_2 = NA,
+                        alpha_MW = NA)
+  
+  for (i in 1:length(nut_vec)) {
+    df_test <- rbind(df_test, list_outputs[[i]])
+  }
+  
+  # delete first line of NAs
+  df_test <- df_test[-1,] |>
+    tidyr::pivot_wider(names_from = Nutrient, 
+                       values_from = alpha_MW)
+  
+  openxlsx::write.xlsx(df_test, 
+                       file = "output/figures-tables-article/Mann_Whitney_test_clust_PCs_compo_sites.xlsx")
+  
+  df_test
+}
+
 
 
 #'
@@ -1629,155 +1574,6 @@ MWtest_clust_k3 <- function(list_res_clust_sites,
   
   df_test
 }
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# concentration of fish in different clusters 
-MWtest_clust_k34 <- function(list_res_clust_sites,
-                            scat_compo_tib) {
-  
-  # assign each sample to its cluster
-  clust_vec_CN <- list_res_clust_sites$CN$cluster
-  clust_vec_PS <- list_res_clust_sites$PS$cluster
-  
-  scat_compo_tib_CN <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  scat_compo_tib_PS <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Pointe Suzanne") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  
-  nut_vec <- unique(scat_compo_tib_CN$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table_CN <- scat_compo_tib_CN |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_PS <- scat_compo_tib_PS |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_CN$cluster <- factor(table_CN$cluster)
-    table_PS$cluster <- factor(table_PS$cluster)
-    
-    table_CN <- table_CN |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_CN <- na.omit(table_CN$`1`)
-    clust2_CN <- na.omit(table_CN$`2`)
-    clust3_CN <- na.omit(table_CN$`3`)
-    
-    table_PS <- table_PS |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_PS <- na.omit(table_PS$`1`)
-    clust2_PS <- na.omit(table_PS$`2`)
-    clust3_PS <- na.omit(table_PS$`3`)
-    clust4_PS <- na.omit(table_PS$`4`)
-    
-    nut_test <- rbind(data.frame(Site = "Cap Noir",
-                                 Nutrient = rep(nut, 3), 
-                                 Cluster_comp_1 = c("1", "1", 
-                                                    "2"), 
-                                 Cluster_comp_2 = c("2", "3",
-                                                    "3"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust3_CN)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust3_CN)[[3]])), 
-                      data.frame(Site = "Pointe Suzanne",
-                                 Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1", 
-                                                    "2", "2", 
-                                                    "3"), 
-                                 Cluster_comp_2 = c("2", "3", "4",
-                                                    "3", "4", 
-                                                    "4"), 
-                                 alpha_MW = c(wilcox.test(clust1_PS, clust2_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust2_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_PS, clust4_PS)[[3]])), 
-                      data.frame(Site = "both",
-                                 Nutrient = rep(nut, 12), 
-                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN", 
-                                                    "2_CN", "2_CN", "2_CN", "2_CN",  
-                                                    "3_CN", "3_CN", "3_CN", "3_CN"), 
-                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS", 
-                                                    "1_PS", "2_PS", "3_PS", "4_PS", 
-                                                    "1_PS", "2_PS", "3_PS", "4_PS"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust4_PS)[[3]]))
-    )
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Site = NA, 
-                        Nutrient = NA, 
-                        Cluster_comp_1 = NA,
-                        Cluster_comp_2 = NA,
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,] |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = alpha_MW)
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/clustering with PCs/Mann_Whitney_test_clust_PCs_k34_compo_sites.xlsx")
-  
-  df_test
-}
-
 
 
 #'
@@ -2350,837 +2146,3 @@ covar_changes_close_clusters <- function(list_res_clust_sites,
   
 }
 
-
-################ 2 - USING THE FULL COMPOSITIONAL DATA #########################
-# as in contrast to using Principal components estimated by PCA 
-# to reduce dimensions before conducting the clustering
-
-#'
-#'
-#'
-#'
-# function to show elemental composition of samples from the different clusters
-boxplot_compo_clust_full_tib <- function(clust_full_tib_output,
-                                         scat_compo_tib
-) {
-  
-  ############################### CAP NOIR #####################################
-  # assign each sample to its cluster
-  clust_vec_CN <- clust_full_tib_output$CN$cluster
-  
-  mean_conc_table_CN <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                     
-                                 Fe, Zn, Sr, Cu, Mn, Se,              
-                                 Ni, Cd, V, Cr, As, Co,                
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                               "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                               "Ag", "Mo", "Pb"))) |> 
-    dplyr::group_by(Nutrient) |>
-    dplyr::summarise(mean_conc = mean(conc_mg_kg_dw), 
-                     median_conc = median(conc_mg_kg_dw))
-  
-  scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                  
-                                 Fe, Zn, Sr, Cu, Mn, Se,                
-                                 Ni, Cd, V, Cr, As, Co,                
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                               "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                               "Ag", "Mo", "Pb")), 
-                  y_lim = dplyr::case_when(Nutrient == "P" ~ 142000,
-                                           Nutrient == "Fe" ~ 18000, 
-                                           Nutrient == "Zn" ~ 1175, 
-                                           Nutrient == "Cu" ~ 850, 
-                                           Nutrient == "Mn" ~ 420, 
-                                           Nutrient == "Se" ~ 135, 
-                                           Nutrient == "Co" ~ 14)) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_boxplot(ggplot2::aes(x = cluster, y = conc_mg_kg_dw, 
-                                       fill = factor(cluster)), 
-                          position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Nutrient,
-                        ncol = 4, scales = "free_y") + 
-    ggplot2::geom_hline(data = mean_conc_table_CN, 
-                        ggplot2::aes(yintercept = mean_conc), 
-                        linetype = "dashed",
-                        color = "darkred") +
-    ggplot2::geom_hline(data = mean_conc_table_CN,
-                        ggplot2::aes(yintercept = median_conc), 
-                        color = "darkred") +
-    ggplot2::geom_blank(ggplot2::aes(y = y_lim)) +
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ggtitle("Cap Noir") +
-    ggplot2::ylab("Absolute concentration in scats\n(mg per kg dry weight)") +
-    ggplot2::xlab("Cluster") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   strip.text.x = ggplot2::element_text(size = 15),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/clust_scat_compo_abs_all_nut_CapNoir.jpg",
-                  scale = 1,
-                  height = 8, width = 9
-  )
-  
-  
-  ######################### POINTE SUZANNE #####################################
-  
-  clust_vec_PS <- clust_full_tib_output$PS$cluster
-  
-  mean_conc_table_PS <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |>
-    dplyr::filter(site == "Pointe Suz") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                
-                                 Fe, Zn, Sr, Cu, Mn, Se,           
-                                 Ni, Cd, V, Cr, As, Co,              
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                               "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                               "Ag", "Mo", "Pb"))) |> 
-    dplyr::group_by(Nutrient) |>
-    dplyr::summarise(mean_conc = mean(conc_mg_kg_dw), 
-                     median_conc = median(conc_mg_kg_dw))
-  
-  
-  scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |>
-    dplyr::filter(site == "Pointe Suz") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                   
-                                 Fe, Zn, Sr, Cu, Mn, Se,             
-                                 Ni, Cd, V, Cr, As, Co,              
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                               "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                               "Ag", "Mo", "Pb")), 
-                  y_lim = dplyr::case_when(Nutrient == "P" ~ 142000,
-                                           Nutrient == "Fe" ~ 18000, 
-                                           Nutrient == "Zn" ~ 1175, 
-                                           Nutrient == "Cu" ~ 850, 
-                                           Nutrient == "Mn" ~ 420, 
-                                           Nutrient == "Se" ~ 135, 
-                                           Nutrient == "Co" ~ 14)) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_boxplot(ggplot2::aes(x = cluster, y = conc_mg_kg_dw, 
-                                       fill = factor(cluster)), 
-                          position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Nutrient, 
-                        ncol = 4, scales = "free_y") + 
-    ggplot2::geom_hline(data = mean_conc_table_PS, 
-                        ggplot2::aes(yintercept = mean_conc),
-                        linetype = "dashed", 
-                        color = "darkred") +
-    ggplot2::geom_hline(data = mean_conc_table_PS,
-                        ggplot2::aes(yintercept = median_conc), 
-                        color = "darkred") +
-    ggplot2::geom_blank(ggplot2::aes(y = y_lim)) +
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ggtitle("Pointe Suzanne") +
-    ggplot2::ylab("Absolute concentration in scats\n(mg per kg dry weight)") +
-    ggplot2::xlab("Cluster") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   strip.text.x = ggplot2::element_text(size = 15),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/clust_scat_compo_abs_all_nut_PSuzanne.jpg",
-                  scale = 1,
-                  height = 8, width = 9
-  )
-  
-  ############################ both sites together ###########################
-  # assign each sample to its cluster
-  clust_vec <- clust_full_tib_output$both$cluster
-  
-  mean_conc_table <- scat_compo_tib |>
-    dplyr::mutate(cluster = clust_vec) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                  
-                                 Fe, Zn, Sr, Cu, Mn, Se,            
-                                 Ni, Cd, V, Cr, As, Co,            
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                               "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                               "Ag", "Mo", "Pb"))) |> 
-    dplyr::group_by(Nutrient) |>
-    dplyr::summarise(mean_conc = mean(conc_mg_kg_dw), 
-                     median_conc = median(conc_mg_kg_dw))
-  
-  scat_compo_tib |>
-    dplyr::mutate(cluster = clust_vec) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K,                  
-                                 Fe, Zn, Sr, Cu, Mn, Se,           
-                                 Ni, Cd, V, Cr, As, Co,             
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Ca", "P", "Mg", "Na", "K", 
-                                               "Fe", "Zn", "Sr", 
-                                               "Cu", "Mn", "Se", "Ni", 
-                                               "V", "As", "Co", "Mo",
-                                               "Cd", "Cr", "Ag", "Pb"))) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_boxplot(ggplot2::aes(x = cluster, y = conc_mg_kg_dw, 
-                                       fill = factor(cluster)), 
-                          position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Nutrient, 
-                        ncol = 4, scales = "free_y") + 
-    ggplot2::geom_hline(data = mean_conc_table, 
-                        ggplot2::aes(yintercept = mean_conc), 
-                        color = "darkred") +
-    ggplot2::geom_hline(data = mean_conc_table,
-                        ggplot2::aes(yintercept = median_conc),
-                        linetype = "dashed", 
-                        color = "darkred") +
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ggtitle("All scats") +
-    ggplot2::ylab("Absolute concentration in scats (mg per kg dry weight)") +
-    ggplot2::xlab("Cluster") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 15), 
-                   axis.text.y = ggplot2::element_text(size = 15), 
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   strip.text.y = ggplot2::element_text(size = 15, 
-                                                        color = "white"),
-                   strip.background = ggplot2::element_rect(fill = "gray30"),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/clust_scat_compo_abs_all_nut_all_scats.jpg",
-                  scale = 1,
-                  height = 8, width = 12
-  )
-  
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# 
-barplot_nut_scat_compo_relative_clust <- function(clust_full_tib_output,
-                                                  scat_compo_tib
-) {
-  
-  # Cap Noir
-  clust_vec_CN <- clust_full_tib_output$CN$cluster
-  
-  scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(sum_nut = Fe + Zn + Cu + Mn + Se + Co, 
-                  cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Fe:Co), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Fe", "Zn", 
-                                               "Cu", "Mn", "Se",
-                                               "Co")), 
-                  conc_relative = conc_mg_kg_dw/sum_nut) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = Nutrient, y = conc_relative, 
-                                   fill = factor(cluster)), 
-                      stat = "identity", 
-                      position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Code_sample) + 
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ggtitle("Cap Noir") +
-    ggplot2::ylab("Relative proportion in scats") +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
-                   axis.text.y = ggplot2::element_text(size = 14), 
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   strip.text.x = ggplot2::element_blank(),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/scat_compo_rel_comp__with clusters_CapNoir_Agazella.jpg",
-                  scale = 1,
-                  height = 6, width = 12
-  )
-  
-  # Pointe Suzanne
-  clust_vec_PS <- clust_full_tib_output$PS$cluster
-  
-  scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Pointe Suz") |>
-    dplyr::mutate(sum_nut = Fe + Zn + Cu + Mn + Se + Co, 
-                  cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Fe:Co), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Fe", "Zn", 
-                                               "Cu", "Mn", "Se",
-                                               "Co")), 
-                  conc_relative = conc_mg_kg_dw/sum_nut) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = Nutrient, y = conc_relative, 
-                                   fill = factor(cluster)), 
-                      stat = "identity", 
-                      position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Code_sample) + 
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ggtitle("Pointe Suzanne") +
-    ggplot2::ylab("Relative proportion in scats") +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
-                   axis.text.y = ggplot2::element_text(size = 14),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   strip.text.x = ggplot2::element_blank(),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/scat_compo_rel_comp_with_clusters_PSuz_Agazella.jpg",
-                  scale = 1,
-                  height = 6, width = 12
-  )
-  
-  ############################ both sites together ###########################
-  clust_vec_all <- clust_full_tib_output$both$cluster
-  
-  scat_compo_tib |>
-    dplyr::mutate(sum_nut = Fe + Zn + Cu + Mn + Se + Co, 
-                  cluster = clust_vec_all) |>
-    tidyr::pivot_longer(cols = c(Fe:Co), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") |> 
-    dplyr::mutate(Nutrient = factor(Nutrient, 
-                                    levels = c("Fe", "Zn", 
-                                               "Cu", "Mn", "Se",
-                                               "Co")), 
-                  conc_relative = conc_mg_kg_dw/sum_nut
-    ) |> 
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = Nutrient, y = conc_relative, 
-                                   fill = factor(cluster)),
-                      stat = "identity", 
-                      position = ggplot2::position_dodge(1)) +
-    ggplot2::facet_wrap(~ Code_sample) + 
-    ggplot2::scale_fill_manual(values = c("1" = "#44A57CFF",
-                                          "2" = "#7EBAC2FF",
-                                          "3" = "#D8AF39FF", 
-                                          "4" = "#AE93BEFF")) +
-    ggplot2::ylab("Relative proportion\nin scats") +
-    ggplot2::xlab("Nutrient") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 14), 
-                   axis.text.y = ggplot2::element_text(size = 14),
-                   title = ggplot2::element_text(size = 17, 
-                                                 face = "bold"),
-                   axis.title.x = ggplot2::element_text(size = 16, 
-                                                        face = "bold"), 
-                   axis.title.y = ggplot2::element_text(size = 16, 
-                                                        face = "bold"),
-                   strip.text.x = ggplot2::element_blank(),
-                   legend.position = "none")
-  ggplot2::ggsave("output/clustering with all nutrients/scat_compo_rel_with_clusters_all_scats.jpg",
-                  scale = 1,
-                  height = 6, width = 12
-  )
-  
-  
-  
-  
-}
-
-
-
-#'
-#'
-#'
-#'
-# output matching species/samples with attributed cluster
-clust_full_tib_samples <- function(clust_full_tib_output,                          
-                                   scat_compo_tib
-) {
-  
-  #Cap Noir
-  clust_vec_CN <- clust_full_tib_output$CN$cluster
-  
-  clust_tib_CN <- scat_compo_tib |> 
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Cap Noir", 
-                  # outliers
-                  !(Code_sample %in% c("CN12"))) |>
-    dplyr::ungroup() |>
-    dplyr::mutate(cluster = as.factor(clust_vec_CN)) 
-  
-  # save 
-  openxlsx::write.xlsx(clust_tib_CN, 
-                       file = "output/clustering with all nutrients/clust_attribution_CN.xlsx")
-  
-  # Pointe Suzanne
-  clust_vec_PS <- clust_full_tib_output$PS$cluster
-  
-  clust_tib_PS <- scat_compo_tib |> 
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suz")) |> 
-    dplyr::filter(site == "Pointe Suz", 
-                  # outliers
-                  !(Code_sample %in% c("CN12"))) |>
-    dplyr::ungroup() |>
-    dplyr::mutate(cluster = as.factor(clust_vec_PS)) 
-  # save 
-  openxlsx::write.xlsx(clust_tib_PS, 
-                       file = "output/clustering with all nutrients/clust_attribution_PS.xlsx")
-  
-  
-  
-}
-
-
-#'
-#'
-#'
-#'
-# function to show elemental composition of samples from the different clusters
-table_stats_clust_per_site_full_tib <- function(list_res_clust_sites_full_tib,
-                                                scat_compo_tib
-) {
-  
-  clust_vec_CN <- list_res_clust_sites_full_tib$CN$cluster
-  clust_vec_PS <- list_res_clust_sites_full_tib$PS$cluster
-  clust_vec_both <- list_res_clust_sites_full_tib$both$cluster
-  
-  table <- rbind(# Cap Noir
-    scat_compo_tib |>
-      dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                            stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-      dplyr::filter(site == "Cap Noir") |>
-      dplyr::mutate(cluster = clust_vec_CN, 
-                    ntot = dplyr::n_distinct(Code_sample)) |>
-      tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                   Fe, Zn, Sr, Cu, Mn, Se,
-                                   Ni, Cd, V, Cr, As, Co, 
-                                   Ag, Mo, Pb), 
-                          names_to = "Nutrient", 
-                          values_to = "conc_mg_kg_dw") |>
-      dplyr::mutate(Nutrient = factor(Nutrient, 
-                                      levels = c("Ca", "P", "Mg", "Na", "K", 
-                                                 "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                                 "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                                 "Ag", "Mo", "Pb"))) |>
-      dplyr::group_by(site, cluster, Nutrient) |>
-      dplyr::reframe(mean = round(mean(conc_mg_kg_dw), 3), 
-                     median = round(median(conc_mg_kg_dw), 3),
-                     sd = round(sd(conc_mg_kg_dw), 3),
-                     n = dplyr::n_distinct(Code_sample), 
-                     clust_ratio = round(100*(n/ntot), 1)) |>
-      dplyr::distinct() |>
-      tidyr::pivot_longer(cols = c(mean, median, sd), 
-                          names_to = "stat_variable", 
-                          values_to = "value") |>
-      tidyr::pivot_wider(names_from = Nutrient, 
-                         values_from = value), 
-    # Pointe Suzanne
-    scat_compo_tib |>
-      dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                            stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-      dplyr::filter(site == "Pointe Suzanne") |>
-      dplyr::mutate(cluster = clust_vec_PS, 
-                    ntot = dplyr::n_distinct(Code_sample)) |>
-      tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                   Fe, Zn, Sr, Cu, Mn, Se,
-                                   Ni, Cd, V, Cr, As, Co, 
-                                   Ag, Mo, Pb), 
-                          names_to = "Nutrient", 
-                          values_to = "conc_mg_kg_dw") |>
-      dplyr::mutate(Nutrient = factor(Nutrient, 
-                                      levels = c("Ca", "P", "Mg", "Na", "K", 
-                                                 "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                                 "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                                 "Ag", "Mo", "Pb"))) |>
-      dplyr::group_by(site, cluster, Nutrient) |>
-      dplyr::reframe(mean = round(mean(conc_mg_kg_dw), 3), 
-                     median = round(median(conc_mg_kg_dw), 3),
-                     sd = round(sd(conc_mg_kg_dw), 3),
-                     n = dplyr::n_distinct(Code_sample), 
-                     clust_ratio = round(100*(n/ntot), 1)) |>
-      dplyr::distinct() |>
-      tidyr::pivot_longer(cols = c(mean, median, sd), 
-                          names_to = "stat_variable", 
-                          values_to = "value") |>
-      tidyr::pivot_wider(names_from = Nutrient, 
-                         values_from = value), 
-    # both sites together
-    scat_compo_tib |>
-      dplyr::mutate(site = "both") |>
-      dplyr::mutate(cluster = clust_vec_both, 
-                    ntot = dplyr::n_distinct(Code_sample)) |>
-      tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                   Fe, Zn, Sr, Cu, Mn, Se,
-                                   Ni, Cd, V, Cr, As, Co, 
-                                   Ag, Mo, Pb), 
-                          names_to = "Nutrient", 
-                          values_to = "conc_mg_kg_dw") |>
-      dplyr::mutate(Nutrient = factor(Nutrient, 
-                                      levels = c("Ca", "P", "Mg", "Na", "K", 
-                                                 "Fe", "Zn", "Sr", "Cu", "Mn", "Se",
-                                                 "Ni", "Cd", "V", "Cr", "As", "Co", 
-                                                 "Ag", "Mo", "Pb"))) |>
-      dplyr::group_by(site, cluster, Nutrient) |>
-      dplyr::reframe(mean = round(mean(conc_mg_kg_dw), 3), 
-                     median = round(median(conc_mg_kg_dw), 3),
-                     sd = round(sd(conc_mg_kg_dw), 3),
-                     n = dplyr::n_distinct(Code_sample), 
-                     clust_ratio = round(100*(n/ntot), 1)) |>
-      dplyr::distinct() |>
-      tidyr::pivot_longer(cols = c(mean, median, sd), 
-                          names_to = "stat_variable", 
-                          values_to = "value") |>
-      tidyr::pivot_wider(names_from = Nutrient, 
-                         values_from = value)
-  )
-  
-  openxlsx::write.xlsx(table, 
-                       file = "output/clustering with all nutrients/clust_all_nut_compo_sites.xlsx")
-  
-  table 
-  
-}
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# concentration of fish in different clusters 
-MWtest_clust_k33_full_tib <- function(list_res_clust_full_tib_sites,
-                                      scat_compo_tib) {
-  
-  # assign each sample to its cluster
-  clust_vec_CN <- list_res_clust_full_tib_sites$CN$cluster
-  clust_vec_PS <- list_res_clust_full_tib_sites$PS$cluster
-  
-  scat_compo_tib_CN <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  scat_compo_tib_PS <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Pointe Suzanne") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  
-  nut_vec <- unique(scat_compo_tib_CN$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table_CN <- scat_compo_tib_CN |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_PS <- scat_compo_tib_PS |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_CN$cluster <- factor(table_CN$cluster)
-    table_PS$cluster <- factor(table_PS$cluster)
-    
-    table_CN <- table_CN |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_CN <- na.omit(table_CN$`1`)
-    clust2_CN <- na.omit(table_CN$`2`)
-    clust3_CN <- na.omit(table_CN$`3`)
-    
-    table_PS <- table_PS |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_PS <- na.omit(table_PS$`1`)
-    clust2_PS <- na.omit(table_PS$`2`)
-    clust3_PS <- na.omit(table_PS$`3`)
-    
-    nut_test <- rbind(data.frame(Site = "Cap Noir",
-                                 Nutrient = rep(nut, 3), 
-                                 Cluster_comp_1 = c("1", "1", 
-                                                    "2"), 
-                                 Cluster_comp_2 = c("2", "3", 
-                                                    "3"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust3_CN)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust3_CN)[[3]])), 
-                      data.frame(Site = "Pointe Suzanne",
-                                 Nutrient = rep(nut, 3), 
-                                 Cluster_comp_1 = c("1", "1", 
-                                                    "2"), 
-                                 Cluster_comp_2 = c("2", "3", 
-                                                    "3"), 
-                                 alpha_MW = c(wilcox.test(clust1_PS, clust2_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust3_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_PS, clust3_PS)[[3]])))
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Site = NA, 
-                        Nutrient = NA, 
-                        Cluster_comp_1 = NA,
-                        Cluster_comp_2 = NA,
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,] |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = alpha_MW)
-  
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/clustering with all nutrients/Mann_Whitney_test_clust_all_nut_compo_sites_k33.xlsx")
-  
-  
-}
-
-
-
-#'
-#'
-#'
-#'
-#'
-# function to compute Mann-Whitney U Test to assess difference between 
-# concentration of fish in different clusters 
-MWtest_clust_k34_full_tib <- function(list_res_clust_full_tib_sites,
-                                      scat_compo_tib) {
-  
-  # assign each sample to its cluster
-  clust_vec_CN <- list_res_clust_full_tib_sites$CN$cluster
-  clust_vec_PS <- list_res_clust_full_tib_sites$PS$cluster
-  
-  scat_compo_tib_CN <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Cap Noir") |>
-    dplyr::mutate(cluster = clust_vec_CN) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  scat_compo_tib_PS <- scat_compo_tib |>
-    dplyr::mutate(site = dplyr::case_when(stringr::str_detect(Code_sample, "CN") ~ "Cap Noir", 
-                                          stringr::str_detect(Code_sample, "PS") ~ "Pointe Suzanne")) |>
-    dplyr::filter(site == "Pointe Suzanne") |>
-    dplyr::mutate(cluster = clust_vec_PS) |>
-    tidyr::pivot_longer(cols = c(Ca, P, Mg, Na, K, 
-                                 Fe, Zn, Sr, Cu, Mn, Se,
-                                 Ni, Cd, V, Cr, As, Co, 
-                                 Ag, Mo, Pb), 
-                        names_to = "Nutrient", 
-                        values_to = "conc_mg_kg_dw") 
-  
-  
-  nut_vec <- unique(scat_compo_tib_CN$Nutrient)
-  
-  list_outputs <- list()
-  
-  for (nut in nut_vec) {
-    
-    table_CN <- scat_compo_tib_CN |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_PS <- scat_compo_tib_PS |>
-      dplyr::filter(Nutrient == nut)
-    
-    table_CN$cluster <- factor(table_CN$cluster)
-    table_PS$cluster <- factor(table_PS$cluster)
-    
-    table_CN <- table_CN |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_CN <- na.omit(table_CN$`1`)
-    clust2_CN <- na.omit(table_CN$`2`)
-    clust3_CN <- na.omit(table_CN$`3`)
-    
-    table_PS <- table_PS |>
-      tidyr::pivot_wider(names_from = cluster, 
-                         values_from = conc_mg_kg_dw) 
-    
-    clust1_PS <- na.omit(table_PS$`1`)
-    clust2_PS <- na.omit(table_PS$`2`)
-    clust3_PS <- na.omit(table_PS$`3`)
-    clust4_PS <- na.omit(table_PS$`4`)
-    
-    nut_test <- rbind(data.frame(Site = "Cap Noir",
-                                 Nutrient = rep(nut, 3), 
-                                 Cluster_comp_1 = c("1", "1", 
-                                                    "2"), 
-                                 Cluster_comp_2 = c("2", "3", 
-                                                    "3"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust2_CN)[[3]],
-                                              wilcox.test(clust1_CN, clust3_CN)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust3_CN)[[3]])),
-                      data.frame(Site = "Pointe Suzanne",
-                                 Nutrient = rep(nut, 6), 
-                                 Cluster_comp_1 = c("1", "1", "1",
-                                                    "2", "2", 
-                                                    "3"), 
-                                 Cluster_comp_2 = c("2", "3", "4",
-                                                    "3", "4", 
-                                                    "4"), 
-                                 alpha_MW = c(wilcox.test(clust1_PS, clust2_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust1_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_PS, clust3_PS)[[3]],
-                                              wilcox.test(clust2_PS, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_PS, clust4_PS)[[3]])), 
-                      data.frame(Site = "both",
-                                 Nutrient = rep(nut, 12), 
-                                 Cluster_comp_1 = c("1_CN", "1_CN", "1_CN", "1_CN",
-                                                    "2_CN", "2_CN", "2_CN", "2_CN", 
-                                                    "3_CN", "3_CN", "3_CN", "3_CN"), 
-                                 Cluster_comp_2 = c("1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS",
-                                                    "1_PS", "2_PS", "3_PS", "4_PS"), 
-                                 alpha_MW = c(wilcox.test(clust1_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust1_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust2_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust2_CN, clust4_PS)[[3]],
-                                              
-                                              wilcox.test(clust3_CN, clust1_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust2_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust3_PS)[[3]],
-                                              wilcox.test(clust3_CN, clust4_PS)[[3]]))
-    )
-    
-    list_outputs <- append(list_outputs, list(nut_test))
-  }
-  
-  
-  df_test <- data.frame(Site = NA, 
-                        Nutrient = NA, 
-                        Cluster_comp_1 = NA,
-                        Cluster_comp_2 = NA,
-                        alpha_MW = NA)
-  
-  for (i in 1:length(nut_vec)) {
-    df_test <- rbind(df_test, list_outputs[[i]])
-  }
-  
-  # delete first line of NAs
-  df_test <- df_test[-1,] |>
-    tidyr::pivot_wider(names_from = Nutrient, 
-                       values_from = alpha_MW)
-  
-  
-  openxlsx::write.xlsx(df_test, 
-                       file = "output/clustering with all nutrients/Mann_Whitney_test_clust_all_nut_compo_sites_k34.xlsx")
-  
-  
-}
