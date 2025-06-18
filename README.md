@@ -2,8 +2,8 @@
 Assessing the variability in the multi-nutrient content of scats of Antarctic 
 fur seals in Kerguelen and using this data to estimate their nutrient release.
 
-This R project is associated to the article Gilbert et al. (2025), (add journal
-and doi).
+This R project is associated to the article Gilbert et al. (2025), 
+https://doi.org.10.1016/j.scitotenv.2025.179195.
 
 This R project contains all the analysis of data conducted for this project
 from data exploration to modeling and result analysis.
